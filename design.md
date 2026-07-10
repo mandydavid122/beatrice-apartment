@@ -48,21 +48,30 @@ Accent is CTA-only: WhatsApp button, phone link, map link. Never used for headin
 
 ## Typography
 
-- Headline: Playfair Display, 600/700 weight. Used for H1/H2/host name only — not body, not nav, not buttons.
-- Body: PT Sans, 400/700. Everything else — paragraphs, nav, buttons, form labels.
-- Scale (mobile-first, rem):
-  - H1: 2.25rem / 1.15 line-height
-  - H2: 1.5rem / 1.2
-  - body: 1rem / 1.6
-  - small/meta: 0.875rem / 1.5
-- No more than 2 weights per family in play at once. No italics except the handwritten signature block (separate face, see Imperfection).
-- HU and UA both verified glyph-complete in both faces — no fallback-font flash on toggle.
+- Modular scale (ratio 1.25, per doctrine Section 4): 16 → 20 → 25 → 31 → 39 → 49 → 61 px.
+- Headline: Playfair Display. H1/H2/host name only — not body, not nav, not buttons. The H1 tagline uses the italic **500** cut ONLY — the loaded face has no 700 italic, so a `font-weight:700` rule reaching it makes the browser synth-bold an italic serif (looks broken). Lock `.hero__tagline` to 500.
+- Body: PT Sans, 400/700. Body text **17px** (doctrine 17–18px preferred), line-height 1.6.
+- Scale in use (clamp() for smooth desktop bump on display sizes):
+  - H1: clamp(31px → 39px)
+  - H2: clamp(25px → 31px)
+  - H3: 20px
+  - hero sub: 20px
+  - body / room copy: 17px
+  - captions / meta / gallery + feature captions / contact block: **15–16px** — nothing below 15px as reading text
+  - eyebrow: 13px all-caps label ONLY (short label, not reading text — the single sub-15px exception)
+- No more than 2 weights per family at once. No italics except the H1 tagline, host note/signoff (Playfair italic), and the host note face.
+- HU + UA glyph-complete in both faces — no fallback-font flash on toggle.
 
 ## Layout
 
-- Single-column, mobile-first; max content width 640px, centered, generous side padding (--sp-3 minimum).
-- Section rhythm: alternate --c-ground / --c-ground-alt bands to separate content blocks without borders.
-- Sticky bottom bar on mobile: WhatsApp + call, always reachable, never requires scrolling back up. This is the primary conversion surface — treat it as load-bearing, not a footer afterthought.
+- Mobile-first single-column; content max 640px, centered, side padding ≥ --sp-3. Confirmed working — unchanged below 900px.
+- Desktop (≥900px):
+  - Hero → asymmetric two-column: text column (eyebrow, H1, sub, CTA, price) left inside the content frame; hero photo right, breaking OUT of the 640 frame and bleeding to the viewport's right edge, framed by a 1px low-opacity --c-ink hairline. Sharp and proud, never blurred, never a text-backdrop.
+  - Feature/terrace band: same full-bleed break-out, photo anchored to one edge with a deliberate asymmetric margin on the other (this is the DDR K9 "asymmetric grid break").
+  - Any single image panel is width-capped (~760–820px) so the small source photos are not upscaled across the whole viewport.
+  - Gallery gets its own wider container (~1100px) + 3-column grid; click any tile to open a lightbox.
+- Section rhythm: alternate --c-ground / --c-ground-alt bands, no borders.
+- Sticky bottom bar on mobile: WhatsApp + call, always reachable — load-bearing conversion surface, not a footer afterthought.
 - No hamburger-menu breadcrumb sprawl (see Differentiation, DDR #10). One page, anchor-scrolled sections: Welcome → Rooms → Location → Host note → Contact.
 
 ## Components
