@@ -83,6 +83,7 @@ p { margin: 0 0 var(--sp-2); }
   background: color-mix(in srgb, var(--c-ground) 92%, transparent);
   backdrop-filter: blur(6px);
 }
+.header__logo, .hero__mark, .footer__logo { aspect-ratio: 960 / 957; }
 .header__logo { height: 36px; width: auto; mix-blend-mode: multiply; }
 
 /* ---- language toggle ---- */
@@ -183,9 +184,27 @@ p { margin: 0 0 var(--sp-2); }
 }
 .band--alt .ph__label { background: var(--c-ground-alt); }
 
+/* ---- real photos: CSS aspect-ratio reserves space => no CLS ---- */
+.hero__figure, .feature__figure { margin: var(--sp-3) 0 0; }
+.hero__photo, .feature__photo, .room__photo, .map__photo {
+  width: 100%; height: auto; display: block;
+  object-fit: cover; border-radius: var(--r-sm);
+}
+.hero__photo { aspect-ratio: 3 / 2; margin-top: var(--sp-3); }
+.feature__photo { aspect-ratio: 3 / 2; }
+.room__photo { aspect-ratio: 4 / 3; margin-top: var(--sp-2); }
+.map__photo { aspect-ratio: 1 / 1; margin: var(--sp-3) 0; }
+.feature__cap { margin-top: var(--sp-1); }
+.feature__cap, .gallery__cap { font-family: "PT Sans", sans-serif; font-size: 0.8125rem; color: var(--c-ink-soft); }
+
 .gallery { display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-2); margin-top: var(--sp-3); }
-.gallery .ph { margin-top: 0; }
-.gallery .ph--wide { grid-column: span 2; }
+.gallery__item { margin: 0; }
+.gallery__item--wide { grid-column: span 2; }
+.gallery__item img {
+  width: 100%; height: auto; display: block;
+  aspect-ratio: 4 / 3; object-fit: cover; border-radius: var(--r-sm);
+}
+.gallery__cap { margin-top: var(--sp-1); }
 
 /* ---- location ---- */
 .nap { font-size: 0.9375rem; line-height: 1.8; margin: var(--sp-3) 0; }

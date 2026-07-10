@@ -7,7 +7,7 @@
   <meta property="og:type" content="website">
   <meta property="og:title" content="Apartment Beatrice — Mala Bijhány, Kárpátalja">
   <meta property="og:description" content="Családi apartman a kosonyi termálfürdők közelében. Írj WhatsAppon a szabad időpontokért.">
-  <meta property="og:image" content="assets/logo.jpg">
+  <meta property="og:image" content="/assets/n3-1200.webp">
   <meta property="og:locale" content="hu_HU">
   <meta property="og:locale:alternate" content="uk_UA">
   <title>Apartment Beatrice — Mala Bijhány, Kárpátalja</title>
@@ -16,6 +16,9 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,500;1,600&family=Playfair+Display:ital,wght@0,600;0,700;1,500&family=PT+Sans:wght@400;700&display=swap" rel="stylesheet">
 
+  <!-- LCP hero image preload -->
+  <link rel="preload" as="image" href="/assets/n3-1200.webp" imagesrcset="/assets/n3-480.webp 480w, /assets/n3-1200.webp 620w" imagesizes="(max-width:672px) 100vw, 640px" fetchpriority="high">
+
   <!-- base.css loads LAST — cascade order law C1 -->
   <link rel="stylesheet" href="base.css">
 </head>
@@ -23,7 +26,7 @@
 
   <!-- ===== HEADER ===== -->
   <header class="header">
-    <img class="header__logo" src="assets/logo.jpg" alt="Apartment Beatrice">
+    <img class="header__logo" src="/assets/logo.jpg" alt="Apartment Beatrice">
     <nav class="lang" aria-label="Nyelv / Мова">
       <button class="lang__btn" data-lang="hu" aria-pressed="true">HU</button>
       <span class="lang__sep" aria-hidden="true">/</span>
@@ -34,7 +37,7 @@
   <!-- ===== HERO ===== -->
   <section class="hero wrap">
     <div class="eyebrow" data-i18n="heroEyebrow"></div>
-    <img class="hero__mark" src="assets/logo.jpg" alt="Apartment Beatrice — AB monogram">
+    <img class="hero__mark" src="/assets/logo.jpg" alt="Apartment Beatrice — AB monogram">
     <svg class="swash" viewBox="0 0 220 36" aria-hidden="true">
       <path d="M6 26 C 46 2, 90 34, 130 10 S 196 2, 214 16" fill="none" stroke-width="2.5" stroke-linecap="round"></path>
     </svg>
@@ -46,6 +49,9 @@
       <a class="btn btn--ghost" data-link="maps" target="_blank" rel="noopener" data-i18n="ctaMaps"></a>
     </div>
     <div class="meta hero__price" data-i18n="priceLine"></div>
+    <figure class="hero__figure">
+      <img class="hero__photo" src="/assets/n3-1200.webp" srcset="/assets/n3-480.webp 480w, /assets/n3-1200.webp 620w" sizes="(max-width:672px) 100vw, 640px" width="620" height="465" fetchpriority="high" decoding="async" data-alt="cap3" alt="">
+    </figure>
   </section>
 
   <!-- ===== HOST WELCOME (imperfection: handwritten voice, off-center) ===== -->
@@ -55,6 +61,16 @@
         <p class="host__note" data-i18n="hostWelcome"></p>
         <p class="host__signoff" data-i18n="hostSignoff"></p>
       </div>
+    </div>
+  </section>
+
+  <!-- ===== FEATURE / TERRACE ===== -->
+  <section class="band feature">
+    <div class="wrap">
+      <figure class="feature__figure">
+        <img class="feature__photo" src="/assets/n4-1200.webp" srcset="/assets/n4-480.webp 480w, /assets/n4-1200.webp 698w" sizes="(max-width:672px) 100vw, 640px" width="698" height="931" loading="lazy" decoding="async" data-alt="cap4" alt="">
+        <figcaption class="feature__cap" data-i18n="cap4"></figcaption>
+      </figure>
     </div>
   </section>
 
@@ -70,12 +86,12 @@
       <div class="room">
         <h3 data-i18n="room1Title"></h3>
         <p class="room__copy" data-i18n="room1Copy"></p>
-        <div class="ph ph--43"><span class="ph__label" data-i18n="photoLabelInterior"></span></div>
+        <img class="room__photo" src="/assets/n5-1200.webp" srcset="/assets/n5-480.webp 480w, /assets/n5-1200.webp 524w" sizes="(max-width:672px) 100vw, 640px" width="524" height="699" loading="lazy" decoding="async" data-alt="cap5" alt="">
       </div>
       <div class="room">
         <h3 data-i18n="room2Title"></h3>
         <p class="room__copy" data-i18n="room2Copy"></p>
-        <div class="ph ph--43"><span class="ph__label" data-i18n="photoLabelKitchen"></span></div>
+        <img class="room__photo" src="/assets/n6-1200.webp" srcset="/assets/n6-480.webp 480w, /assets/n6-1200.webp 625w" sizes="(max-width:672px) 100vw, 640px" width="625" height="465" loading="lazy" decoding="async" data-alt="cap6" alt="">
       </div>
     </div>
   </section>
@@ -88,11 +104,58 @@
         <p class="meta" data-i18n="galleryNote"></p>
       </div>
       <div class="gallery">
-        <div class="ph ph--wide ph--43"><span class="ph__label" data-i18n="photoLabelExterior"></span></div>
-        <div class="ph ph--43"><span class="ph__label" data-i18n="photoLabelBedroom"></span></div>
-        <div class="ph ph--43"><span class="ph__label" data-i18n="photoLabelBathroom"></span></div>
-        <div class="ph ph--43"><span class="ph__label" data-i18n="photoLabelDetail"></span></div>
-        <div class="ph ph--43"><span class="ph__label" data-i18n="photoLabelSprings"></span></div>
+        <figure class="gallery__item gallery__item--wide">
+          <img src="/assets/n3-1200.webp" srcset="/assets/n3-480.webp 480w, /assets/n3-1200.webp 620w" sizes="(max-width:672px) 92vw, 620px" width="620" height="465" loading="lazy" decoding="async" data-alt="cap3" alt="">
+          <figcaption class="gallery__cap" data-i18n="cap3"></figcaption>
+        </figure>
+        <figure class="gallery__item">
+          <img src="/assets/n4-1200.webp" srcset="/assets/n4-480.webp 480w, /assets/n4-1200.webp 698w" sizes="(max-width:672px) 45vw, 300px" width="698" height="931" loading="lazy" decoding="async" data-alt="cap4" alt="">
+          <figcaption class="gallery__cap" data-i18n="cap4"></figcaption>
+        </figure>
+        <figure class="gallery__item">
+          <img src="/assets/n5-1200.webp" srcset="/assets/n5-480.webp 480w, /assets/n5-1200.webp 524w" sizes="(max-width:672px) 45vw, 300px" width="524" height="699" loading="lazy" decoding="async" data-alt="cap5" alt="">
+          <figcaption class="gallery__cap" data-i18n="cap5"></figcaption>
+        </figure>
+        <figure class="gallery__item">
+          <img src="/assets/n8-1200.webp" srcset="/assets/n8-480.webp 480w, /assets/n8-1200.webp 532w" sizes="(max-width:672px) 45vw, 300px" width="532" height="399" loading="lazy" decoding="async" data-alt="cap8" alt="">
+          <figcaption class="gallery__cap" data-i18n="cap8"></figcaption>
+        </figure>
+        <figure class="gallery__item">
+          <img src="/assets/n2-1200.webp" srcset="/assets/n2-480.webp 480w, /assets/n2-1200.webp 698w" sizes="(max-width:672px) 45vw, 300px" width="698" height="931" loading="lazy" decoding="async" data-alt="cap2" alt="">
+          <figcaption class="gallery__cap" data-i18n="cap2"></figcaption>
+        </figure>
+        <figure class="gallery__item">
+          <img src="/assets/n6-1200.webp" srcset="/assets/n6-480.webp 480w, /assets/n6-1200.webp 625w" sizes="(max-width:672px) 45vw, 300px" width="625" height="465" loading="lazy" decoding="async" data-alt="cap6" alt="">
+          <figcaption class="gallery__cap" data-i18n="cap6"></figcaption>
+        </figure>
+        <figure class="gallery__item">
+          <img src="/assets/n7-1200.webp" srcset="/assets/n7-480.webp 480w, /assets/n7-1200.webp 532w" sizes="(max-width:672px) 45vw, 300px" width="532" height="399" loading="lazy" decoding="async" data-alt="cap7" alt="">
+          <figcaption class="gallery__cap" data-i18n="cap7"></figcaption>
+        </figure>
+        <figure class="gallery__item">
+          <img src="/assets/n1-1200.webp" srcset="/assets/n1-1200.webp 419w" sizes="(max-width:672px) 45vw, 300px" width="419" height="465" loading="lazy" decoding="async" data-alt="cap1" alt="">
+          <figcaption class="gallery__cap" data-i18n="cap1"></figcaption>
+        </figure>
+        <figure class="gallery__item">
+          <img src="/assets/n9-1200.webp" srcset="/assets/n9-480.webp 480w, /assets/n9-1200.webp 698w" sizes="(max-width:672px) 45vw, 300px" width="698" height="931" loading="lazy" decoding="async" data-alt="cap9" alt="">
+          <figcaption class="gallery__cap" data-i18n="cap9"></figcaption>
+        </figure>
+        <figure class="gallery__item">
+          <img src="/assets/h1-1200.webp" srcset="/assets/h1-1200.webp 465w" sizes="(max-width:672px) 45vw, 300px" width="465" height="465" loading="lazy" decoding="async" data-alt="caph1" alt="">
+          <figcaption class="gallery__cap" data-i18n="caph1"></figcaption>
+        </figure>
+        <figure class="gallery__item">
+          <img src="/assets/h2-1200.webp" srcset="/assets/h2-480.webp 480w, /assets/h2-1200.webp 524w" sizes="(max-width:672px) 45vw, 300px" width="524" height="699" loading="lazy" decoding="async" data-alt="caph2" alt="">
+          <figcaption class="gallery__cap" data-i18n="caph2"></figcaption>
+        </figure>
+        <figure class="gallery__item">
+          <img src="/assets/h3-1200.webp" srcset="/assets/h3-1200.webp 418w" sizes="(max-width:672px) 45vw, 300px" width="418" height="558" loading="lazy" decoding="async" data-alt="caph3" alt="">
+          <figcaption class="gallery__cap" data-i18n="caph3"></figcaption>
+        </figure>
+        <figure class="gallery__item">
+          <img src="/assets/h4-1200.webp" srcset="/assets/h4-480.webp 480w, /assets/h4-1200.webp 539w" sizes="(max-width:672px) 45vw, 300px" width="539" height="399" loading="lazy" decoding="async" data-alt="caph4" alt="">
+          <figcaption class="gallery__cap" data-i18n="caph4"></figcaption>
+        </figure>
       </div>
     </div>
   </section>
@@ -109,7 +172,7 @@
         <div data-i18n="napAddress"></div>
         <div data-i18n="napPhone"></div>
       </div>
-      <div class="ph ph--11"><span class="ph__label" data-i18n="mapLabel"></span></div>
+      <img class="map__photo" src="/assets/n1-1200.webp" srcset="/assets/n1-1200.webp 419w" sizes="(max-width:672px) 100vw, 640px" width="419" height="465" loading="lazy" decoding="async" data-alt="cap1" alt="">
       <div class="cta-row" style="justify-content:flex-start">
         <a class="btn btn--ghost" data-link="maps" target="_blank" rel="noopener" data-i18n="ctaMaps"></a>
       </div>
@@ -130,7 +193,7 @@
 
   <!-- ===== FOOTER ===== -->
   <footer class="footer">
-    <img class="footer__logo" src="assets/logo.jpg" alt="Apartment Beatrice">
+    <img class="footer__logo" src="/assets/logo.jpg" alt="Apartment Beatrice">
     <div class="meta">
       <div data-i18n="napAddress"></div>
       <div><span data-i18n="napPhone"></span> · apartmentbeatrice@gmail.com</div>

@@ -43,7 +43,23 @@ var COPY = {
   photoLabelBedroom:  { hu: "[FOTÓ: hálószoba, helyettesítő]", ua: "[ФОТО: спальня, плейсхолдер]" },
   photoLabelBathroom: { hu: "[FOTÓ: fürdőszoba, helyettesítő]", ua: "[ФОТО: ванна кімната, плейсхолдер]" },
   photoLabelDetail:   { hu: "[FOTÓ: enteriőr részlet, helyettesítő]", ua: "[ФОТО: деталь інтер’єру, плейсхолдер]" },
-  photoLabelSprings:  { hu: "[FOTÓ: kosonyi termálfürdő, helyettesítő]", ua: "[ФОТО: косоньські термальні води, плейсхолдер]" }
+  photoLabelSprings:  { hu: "[FOTÓ: kosonyi termálfürdő, helyettesítő]", ua: "[ФОТО: косоньські термальні води, плейсхолдер]" },
+
+  // Photo captions (= <img alt> + gallery figcaption). UA values machine-translated
+  // -- machine-translated, human review pending.
+  cap1:  { hu: "Kert és bejárat", ua: "Сад і вхід" },
+  cap2:  { hu: "Hangulatos hálószoba", ua: "Затишна спальня" },
+  cap3:  { hu: "A vendégház és a bejárat", ua: "Будинок і вхід" },
+  cap4:  { hu: "Fedett terasz", ua: "Крита тераса" },
+  cap5:  { hu: "Közös helyiség", ua: "Спільна кімната" },
+  cap6:  { hu: "Konyha", ua: "Кухня" },
+  cap7:  { hu: "Gondozott kert", ua: "Доглянутий сад" },
+  cap8:  { hu: "Szoba saját fürdővel", ua: "Кімната з власною ванною" },
+  cap9:  { hu: "Családi szoba", ua: "Сімейна кімната" },
+  caph1: { hu: "Hálószoba", ua: "Спальня" },
+  caph2: { hu: "Fürdőszoba zuhanyzóval", ua: "Ванна кімната з душем" },
+  caph3: { hu: "Kerti tó", ua: "Садовий ставок" },
+  caph4: { hu: "Hálószoba", ua: "Спальня" }
 };
 
 var PHONE = "380952107069";
@@ -56,6 +72,11 @@ function apply(lang) {
   document.querySelectorAll("[data-i18n]").forEach(function (el) {
     var entry = COPY[el.getAttribute("data-i18n")];
     if (entry) el.textContent = entry[lang];
+  });
+
+  document.querySelectorAll("[data-alt]").forEach(function (el) {
+    var entry = COPY[el.getAttribute("data-alt")];
+    if (entry) el.alt = entry[lang];
   });
 
   var waHref = "https://wa.me/" + PHONE + "?text=" + encodeURIComponent(COPY.waMessage[lang]);
