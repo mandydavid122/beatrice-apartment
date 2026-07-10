@@ -100,6 +100,24 @@ document.querySelectorAll(".lang__btn").forEach(function (b) {
   b.addEventListener("click", function () { apply(b.getAttribute("data-lang")); });
 });
 
+// Scroll-to-top button: appears once the user scrolls past the hero.
+(function () {
+  var btn = document.querySelector(".totop");
+  var hero = document.querySelector(".hero");
+  if (!btn || !hero) return;
+  btn.hidden = false;
+
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (en) { btn.classList.toggle("is-visible", !en.isIntersecting); });
+  }, { threshold: 0 });
+  io.observe(hero);
+
+  btn.addEventListener("click", function () {
+    var reduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    window.scrollTo({ top: 0, behavior: reduced ? "auto" : "smooth" });
+  });
+})();
+
 // Motion: reveal section heads only, on scroll-in. Never a blanket per-element reveal.
 if (!window.matchMedia || !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
   var io = new IntersectionObserver(function (entries) {

@@ -28,6 +28,9 @@
 /* ---- reset / base ---- */
 * { box-sizing: border-box; }
 html { -webkit-text-size-adjust: 100%; }
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
+}
 body {
   margin: 0;
   background: var(--c-ground);
@@ -108,6 +111,7 @@ p { margin: 0 0 var(--sp-2); }
 .hero__tagline {
   font-family: "Playfair Display", serif;
   font-style: italic;
+  font-weight: 500; /* loaded italic cut is 500-only; h1 default 700 would synth-bold it */
   font-size: 1.75rem;
   line-height: 1.25;
   margin: var(--sp-2) 0;
@@ -232,6 +236,36 @@ p { margin: 0 0 var(--sp-2); }
   border-top: 1px solid color-mix(in srgb, var(--c-ink) 15%, var(--c-ground));
 }
 .stickybar .btn { flex: 1; text-align: center; padding: 12px 8px; }
+
+/* ---- scroll to top ---- */
+.totop {
+  position: fixed;
+  right: var(--sp-2);
+  bottom: calc(64px + var(--sp-2) + env(safe-area-inset-bottom, 0px)); /* clears .stickybar height */
+  z-index: 45;
+  width: 48px;
+  height: 48px;
+  border: 1px solid color-mix(in srgb, var(--c-ink) 20%, var(--c-ground));
+  border-radius: 50%;
+  background: var(--c-ground);
+  color: var(--c-ink);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: var(--shadow-card);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+.totop.is-visible { opacity: 1; visibility: visible; pointer-events: auto; }
+@media (prefers-reduced-motion: no-preference) {
+  .totop { transition: opacity 200ms ease-out; }
+}
+
+@media (min-width: 720px) {
+  .totop { bottom: var(--sp-3); }
+}
 
 /* ---- motion: section-head reveal only (respect reduced-motion) ---- */
 .reveal { opacity: 0; transform: translateY(16px); transition: opacity 200ms ease-out, transform 200ms ease-out; }
