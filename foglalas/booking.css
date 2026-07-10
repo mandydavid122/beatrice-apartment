@@ -1,0 +1,133 @@
+/* Apartment Beatrice — booking subsystem. SECONDARY design system (design.md fork).
+   Teal/cream, Quicksand/Nunito, rounded. Scoped to /foglalas + /admin only. */
+:root {
+  --b-ground:  #FFFDF9;
+  --b-surface: #F5EFE3;
+  --b-primary: #1D9E75;
+  --b-primary-ink: #16805E;
+  --b-ink:     #1B3A34;
+  --b-ink-soft: #55716A;
+  --b-line: #E2D9C8;
+  --b-error: #B23A2E;
+  --b-radius-card: 20px;
+  --b-radius-pill: 99px;
+}
+
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--b-ground);
+  color: var(--b-ink);
+  font-family: "Nunito", sans-serif;
+  font-size: 1.0625rem;
+  line-height: 1.6;
+}
+/* Quicksand has no Cyrillic — fall to Nunito (glyph-complete HU+UA) before any system font */
+h1, h2, .bk-step__num { font-family: "Quicksand", "Nunito", sans-serif; font-weight: 700; }
+img { max-width: 100%; display: block; }
+
+/* header */
+.bk-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 16px 20px; max-width: 720px; margin: 0 auto;
+}
+.bk-back { color: var(--b-ink-soft); text-decoration: none; font-weight: 700; }
+.bk-back:hover { color: var(--b-primary); }
+.bk-lang { display: flex; align-items: center; gap: 8px; color: var(--b-line); }
+.bk-lang__btn {
+  border: none; background: none; cursor: pointer; padding: 6px 8px;
+  font-family: "Nunito", sans-serif; font-size: 0.875rem; color: var(--b-ink-soft); opacity: 0.7;
+}
+.bk-lang__btn[aria-pressed="true"] { color: var(--b-primary); font-weight: 700; opacity: 1; }
+
+/* main */
+.bk-main { max-width: 640px; margin: 0 auto; padding: 8px 20px 64px; }
+.bk-title { font-size: clamp(1.75rem, 1.4rem + 1.6vw, 2.25rem); margin: 8px 0 24px; }
+
+/* step indicator */
+.bk-steps {
+  list-style: none; display: flex; gap: 8px; padding: 0; margin: 0 0 32px;
+}
+.bk-step { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 6px; color: var(--b-ink-soft); }
+.bk-step__num {
+  width: 40px; height: 40px; border-radius: var(--b-radius-pill);
+  display: flex; align-items: center; justify-content: center;
+  background: var(--b-surface); color: var(--b-ink-soft); font-size: 1.125rem;
+  border: 2px solid transparent;
+}
+.bk-step__label { font-size: 0.8125rem; }
+.bk-step.is-active .bk-step__num { background: var(--b-primary); color: #fff; }
+.bk-step.is-done .bk-step__num { background: var(--b-primary-ink); color: #fff; }
+.bk-step.is-active .bk-step__label { color: var(--b-ink); font-weight: 700; }
+
+/* panels */
+.bk-panel { display: none; }
+.bk-panel.is-active { display: block; }
+.bk-panel__title { font-size: 1.375rem; margin: 0 0 20px; }
+
+/* fields */
+.bk-field { margin-bottom: 20px; }
+.bk-field label { display: block; font-weight: 700; margin-bottom: 6px; font-size: 0.9375rem; }
+.bk-field input, .bk-field textarea {
+  width: 100%; padding: 12px 14px; font-family: inherit; font-size: 1rem;
+  color: var(--b-ink); background: #fff;
+  border: 1.5px solid var(--b-line); border-radius: 12px;
+}
+.bk-field input:focus-visible, .bk-field textarea:focus-visible {
+  outline: none; border-color: var(--b-primary);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--b-primary) 25%, transparent);
+}
+
+/* buttons (pills) */
+.bk-btn {
+  font-family: "Nunito", sans-serif; font-weight: 700; font-size: 1rem;
+  padding: 14px 28px; border: none; border-radius: var(--b-radius-pill);
+  background: var(--b-primary); color: #fff; cursor: pointer;
+  text-decoration: none; display: inline-block; text-align: center;
+  transition: background-color 150ms ease, transform 100ms ease;
+}
+.bk-btn:hover { background: var(--b-primary-ink); }
+.bk-btn:active { transform: scale(0.98); }
+.bk-btn:disabled { opacity: 0.55; cursor: default; }
+.bk-btn:focus-visible { outline: 3px solid var(--b-primary-ink); outline-offset: 2px; }
+.bk-btn--ghost { background: transparent; color: var(--b-primary); border: 1.5px solid var(--b-primary); }
+.bk-btn--ghost:hover { background: color-mix(in srgb, var(--b-primary) 10%, transparent); color: var(--b-primary-ink); }
+.bk-nav { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 8px; }
+
+/* notes + errors */
+.bk-note { color: var(--b-ink-soft); font-size: 0.9375rem; margin: 0 0 16px; }
+.bk-error { color: var(--b-error); font-weight: 700; font-size: 0.9375rem; margin: 0 0 16px; }
+.bk-error[hidden] { display: none; }
+
+/* honeypot — visually + AT hidden, but focusable off-screen for bots */
+.bk-hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+
+/* room cards */
+.bk-rooms { display: grid; gap: 16px; margin-bottom: 24px; }
+@media (min-width: 560px) { .bk-rooms { grid-template-columns: 1fr 1fr; } }
+.bk-room {
+  border: 2px solid var(--b-line); border-radius: var(--b-radius-card);
+  background: var(--b-surface); overflow: hidden; cursor: pointer;
+  padding: 0; text-align: left; font-family: inherit; color: inherit;
+  display: flex; flex-direction: column; transition: border-color 150ms ease, transform 100ms ease;
+}
+.bk-room:hover { border-color: var(--b-primary); }
+.bk-room:focus-visible { outline: 3px solid var(--b-primary); outline-offset: 2px; }
+.bk-room[aria-pressed="true"] { border-color: var(--b-primary); box-shadow: 0 0 0 2px var(--b-primary) inset; }
+.bk-room__photo { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; background: var(--b-surface); }
+.bk-room__ph {
+  width: 100%; aspect-ratio: 4 / 3; display: flex; align-items: center; justify-content: center;
+  text-align: center; padding: 12px; font-size: 0.8125rem; color: var(--b-ink-soft);
+  background: repeating-linear-gradient(45deg, #EDE4D3, #EDE4D3 10px, transparent 10px, transparent 20px);
+}
+.bk-room__body { padding: 14px 16px; }
+.bk-room__name { font-family: "Quicksand", "Nunito", sans-serif; font-weight: 700; font-size: 1.0625rem; margin: 0 0 4px; }
+.bk-room__desc { font-size: 0.875rem; color: var(--b-ink-soft); margin: 0; }
+
+/* success */
+.bk-success { text-align: center; padding-top: 24px; }
+.bk-success__mark {
+  width: 64px; height: 64px; margin: 0 auto 16px; border-radius: var(--b-radius-pill);
+  background: var(--b-primary); color: #fff; font-size: 2rem;
+  display: flex; align-items: center; justify-content: center;
+}

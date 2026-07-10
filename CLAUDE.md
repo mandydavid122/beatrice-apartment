@@ -66,9 +66,9 @@ design.md is binding; QA per agency doctrine Section 5; every completed task end
 
 ## Project infra
 
-- Static HTML/CSS/JS. No build step, no framework.
-- Deploy: Cloudflare Pages Direct Upload.
-- No Supabase, no booking form.
-- Conversion = WhatsApp (`wa.me/380952107069`, prefilled per-language message) + `tel:+380952107069` + Google Maps route only.
-- base.css loads LAST in `<head>` (cascade order law C1).
+- Static HTML/CSS/JS main site + Cloudflare Pages Functions (`functions/api/*`) backed by a D1 database for the booking subsystem. No build step, no framework.
+- Deploy: Cloudflare Pages (Git-integrated). Manual dashboard steps required: bind D1 as `DB`, set `ADMIN_PASSWORD` secret, set the real GA4 id in `consent.js`.
+- Conversion (main site) = in-house booking flow `/foglalas/` (primary CTA) + `tel:+380952107069` (secondary) + Google Maps route (utility link). WhatsApp removed.
+- `/foglalas/` + `/admin/` are a deliberate SECONDARY design system (teal/cream, Quicksand/Nunito) — see design.md "Secondary Design System". Scoped to those two paths; never leaks into index.html/base.css.
+- base.css loads LAST in `<head>` (cascade order law C1). Main-site tokens unchanged.
 - Reference-only, never ship: `reference/support.js`, `reference/*.dc.html`, `reference/.thumbnail` — Claude Design tool leftovers. Shipped files must contain no `x-dc`, `DCLogic`, `support.js`, `{{ }}`, or `data-screen-label`.

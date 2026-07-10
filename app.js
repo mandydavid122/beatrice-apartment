@@ -3,20 +3,18 @@
 // -- machine-translated, human review pending (native-speaker pass required before launch).
 
 var COPY = {
-  heroEyebrow:   { hu: "Kárpátalja · Mala Bijhány", ua: "Закарпаття · Мала Бийгань" },
+  heroEyebrow:   { hu: "Kárpátalja · Kis Bégány", ua: "Закарпаття · Мала Бийгань" },
   heroTagline:   { hu: "Otthon, amit a családunk épített — most a tiétek is.",
                    ua: "Дім, який збудувала наша родина — тепер і ваш." },
-  heroSubcopy:   { hu: "Apartman szállás Mala Bijhányban, a kosonyi termálfürdők közelében. Nyugodt, családias, valódi — nem egy lista a sok közül.",
+  heroSubcopy:   { hu: "Apartman szállás Kis Bégányban, a Kaszonyi termálfürdők közelében. Nyugodt, családias, valódi — nem egy lista a sok közül.",
                    ua: "Апартаменти в Малій Бийгані, поруч із косоньськими термальними водами. Спокійно, по-сімейному, по-справжньому — а не рядок у каталозі." },
-  ctaWhatsapp:   { hu: "Írj WhatsAppon", ua: "Написати у WhatsApp" },
+  ctaBookRoom:   { hu: "Foglalj szobát", ua: "Забронювати кімнату" },
   ctaCall:       { hu: "Hívás", ua: "Подзвонити" },
   ctaMaps:       { hu: "Útvonal", ua: "Маршрут" },
-  priceLine:     { hu: "1200–1500 UAH / éjszaka / apartman (kb. 11 000–14 000 HUF)",
-                   ua: "1200–1500 грн / ніч / апартаменти (прибл. 11 000–14 000 HUF)" },
-  waMessage:     { hu: "Szia! Érdeklődnék az Apartment Beatrice szabad időpontjairól.",
-                   ua: "Вітаю! Цікавлюсь наявністю вільних дат в Apartment Beatrice." },
-  hostWelcome:   { hu: "„Ez nem szálloda — ez a mi házunk egyik lakása. Amikor megérkeztek, a saját bejáraton léptek be, és onnantól annyi csendet és figyelmet kaptok, amennyire szükségetek van.”",
-                   ua: "«Це не готель — це квартира в нашому будинку. Коли приїдете, зайдете через окремий вхід, і далі — стільки тиші й уваги, скільки вам треба.»" },
+  priceLine:     { hu: "1200–1500 UAH / éjszaka / szoba (kb. 11 000–14 000 HUF)",
+                   ua: "1200–1500 грн / ніч / кімната (прибл. 11 000–14 000 HUF)" },
+  hostWelcome:   { hu: "Nem egy szállodalánc vagyunk — egy családi panzió, ahol minden szobát mi magunk tartunk rendben, és személyesen fogadunk mindenkit, aki megérkezik.",
+                   ua: "Ми не готельна мережа — родинний пансіонат, де кожну кімнату доглядаємо самі, і особисто зустрічаємо кожного гостя." },
   hostSignoff:   { hu: "— az Apartment Beatrice házigazdái", ua: "— господарі Apartment Beatrice" },
   roomsTitle:    { hu: "Terek", ua: "Простори" },
   room1Title:    { hu: "Nappali és háló", ua: "Вітальня та спальня" },
@@ -29,10 +27,10 @@ var COPY = {
   galleryNote:   { hu: "[MEGJEGYZÉS: jelenlegi képek helyettesítő blokkok — valódi felvételek hamarosan]",
                    ua: "[ПРИМІТКА: наразі плейсхолдери — реальні фотографії скоро]" },
   locationTitle: { hu: "Elhelyezkedés", ua: "Розташування" },
-  locationCopy:  { hu: "Mala Bijhányban vagyunk, sétatávolságra a kosonyi termálfürdőktől, kényelmes autóútra a magyar határtól.",
+  locationCopy:  { hu: "Kis Bégányban vagyunk, sétatávolságra a kosonyi termálfürdőktől, kényelmes autóútra a magyar határtól.",
                    ua: "Ми в Малій Бийгані, у пішій відстані від косоньських термальних вод, зручно доїхати від угорського кордону." },
   napName:       { hu: "Apartment Beatrice", ua: "Apartment Beatrice" },
-  napAddress:    { hu: "vul. Miru, Mala Bijhány, Kárpátalja, Ukrajna",
+  napAddress:    { hu: "Béke utca, Kis Bégány, Kárpátalja, Ukrajna",
                    ua: "вул. Миру, Мала Бийгань, Закарпатська обл., Україна" },
   napPhone:      { hu: "+380 95 210 7069", ua: "+380 95 210 7069" },
   mapLabel:      { hu: "[TÉRKÉP: Google Maps beágyazás hamarosan]", ua: "[КАРТА: вбудована Google-карта скоро]" },
@@ -64,7 +62,7 @@ var COPY = {
 
 var PHONE = "380952107069";
 var mapsLink = "https://www.google.com/maps/search/?api=1&query=" +
-  encodeURIComponent("Apartment Beatrice, vul. Miru, Mala Byihan, Zakarpattia Oblast, Ukraine");
+  encodeURIComponent("Apartment Beatrice, Béke utca, Kis Bégány, Zakarpattia Oblast, Ukraine");
 
 function apply(lang) {
   document.documentElement.lang = (lang === "ua") ? "uk" : "hu";
@@ -79,8 +77,6 @@ function apply(lang) {
     if (entry) el.alt = entry[lang];
   });
 
-  var waHref = "https://wa.me/" + PHONE + "?text=" + encodeURIComponent(COPY.waMessage[lang]);
-  document.querySelectorAll('[data-link="wa"]').forEach(function (a) { a.href = waHref; });
   document.querySelectorAll('[data-link="tel"]').forEach(function (a) { a.href = "tel:+" + PHONE; });
   document.querySelectorAll('[data-link="maps"]').forEach(function (a) { a.href = mapsLink; });
 
@@ -129,3 +125,82 @@ if (!window.matchMedia || !window.matchMedia("(prefers-reduced-motion: reduce)")
 } else {
   document.querySelectorAll(".reveal").forEach(function (el) { el.classList.add("is-in"); });
 }
+
+// Hero entrance is pure CSS (auto-plays on load, gated by reduced-motion) — no JS, so it
+// can never strand the hero text invisible if rAF is starved or JS is late.
+
+// Header: 1px border-bottom fades in past ~40px scroll.
+(function () {
+  var h = document.querySelector(".header");
+  if (!h) return;
+  var on = false;
+  function upd() {
+    var s = window.scrollY > 40;
+    if (s !== on) { on = s; h.classList.toggle("is-scrolled", s); }
+  }
+  upd();
+  window.addEventListener("scroll", upd, { passive: true });
+})();
+
+// Lightbox: native <dialog>, browse all 13 gallery images. showModal() gives focus-trap + Escape.
+(function () {
+  var dialog = document.querySelector(".lightbox");
+  if (!dialog || typeof dialog.showModal !== "function") return;
+  var imgEl = dialog.querySelector(".lightbox__img");
+  var capEl = dialog.querySelector(".lightbox__cap");
+  var btns = [].slice.call(document.querySelectorAll(".gallery__btn"));
+  var items = btns.map(function (b) {
+    var im = b.querySelector("img");
+    return { src: im.getAttribute("src"), key: im.getAttribute("data-alt") };
+  });
+  var idx = 0, trigger = null;
+
+  function lang() { return document.documentElement.lang === "uk" ? "ua" : "hu"; }
+  function render() {
+    var it = items[idx];
+    imgEl.setAttribute("src", it.src);
+    var cap = COPY[it.key] ? COPY[it.key][lang()] : "";
+    imgEl.alt = cap;
+    capEl.textContent = cap;
+  }
+  function open(i, trg) {
+    idx = i; trigger = trg; render();
+    document.documentElement.classList.add("lb-open");
+    document.body.classList.add("lb-open");
+    dialog.showModal();
+  }
+  // Every close path routes through here — the native 'close' event is unreliable, so do
+  // scroll-lock cleanup explicitly. Native <dialog> already returns focus to the trigger.
+  function closeLightbox() {
+    document.documentElement.classList.remove("lb-open");
+    document.body.classList.remove("lb-open");
+    if (dialog.open) dialog.close();
+    trigger = null;
+  }
+  function step(d) { idx = (idx + d + items.length) % items.length; render(); }
+
+  btns.forEach(function (b, i) { b.addEventListener("click", function () { open(i, b); }); });
+
+  dialog.addEventListener("click", function (e) {
+    var t = e.target.closest("[data-lb]");
+    if (t) {
+      var a = t.getAttribute("data-lb");
+      if (a === "close") closeLightbox();
+      else if (a === "prev") step(-1);
+      else if (a === "next") step(1);
+      return;
+    }
+    if (e.target === dialog) closeLightbox(); // backdrop click
+  });
+  dialog.addEventListener("keydown", function (e) {
+    if (e.key === "Escape") { e.preventDefault(); closeLightbox(); } // own it, don't depend on native cancel
+    else if (e.key === "ArrowLeft") { e.preventDefault(); step(-1); }
+    else if (e.key === "ArrowRight") { e.preventDefault(); step(1); }
+  });
+  // Backstop for any native close (e.g. form-method dialog): keep scroll-lock in sync.
+  dialog.addEventListener("close", function () {
+    document.documentElement.classList.remove("lb-open");
+    document.body.classList.remove("lb-open");
+    trigger = null;
+  });
+})();

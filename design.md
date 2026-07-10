@@ -2,7 +2,7 @@
 
 1. Client: Apartment Beatrice — family-run 2-apartment guesthouse, Mala Byihan, Zakarpattia, Ukraine
 2. Sector/adjective: Hospitality (Section 2-B), pulled toward restrained/editorial per K4 cross-category override — warm (secondary: rooted/heritage)
-3. Conversion action: primary = one-tap WhatsApp chat; secondary = phone call / route via Google Maps
+3. Conversion action: primary = in-house room booking flow (/foglalas); secondary = phone call (route via Google Maps remains a utility link, not a conversion CTA)
 4. Audience+device: HU tourists (family ties, thermal/nostalgia tourism) + Zakarpattia transit travelers; secondary UA domestic/displaced travelers drawn by Kosonь thermal springs; 100% mobile, on-the-go decisions
 5. Languages+default: HU default on load, UA one-tap toggle (JS-toggle, localStorage-persisted)
 6. Archetype: Hospitality "Warm Human" base, disciplined via Luxury-Editorial typographic restraint (per client's existing calligraphic logo)
@@ -44,7 +44,9 @@
 }
 ```
 
-Accent is CTA-only: WhatsApp button, phone link, map link. Never used for headings, dividers, or icons — that's what makes it read as an action, not decoration.
+Accent is CTA-only: the "Foglalj szobát" booking button, phone link, map link. Never used for headings, dividers, or icons — that's what makes it read as an action, not decoration.
+
+**Conversion CTAs (main site).** WhatsApp is fully removed from the main site as of the booking-subsystem addition. Every CTA row keeps exactly two buttons, in this order: primary accent-filled "Foglalj szobát / Забронювати кімнату" → `/foglalas/`, then ghost "Hívás / Подзвонити" → `tel:`. The maps link stays a ghost utility link in the Location section only, never counted as a conversion action.
 
 ## Typography
 
@@ -71,32 +73,61 @@ Accent is CTA-only: WhatsApp button, phone link, map link. Never used for headin
   - Any single image panel is width-capped (~760–820px) so the small source photos are not upscaled across the whole viewport.
   - Gallery gets its own wider container (~1100px) + 3-column grid; click any tile to open a lightbox.
 - Section rhythm: alternate --c-ground / --c-ground-alt bands, no borders.
-- Sticky bottom bar on mobile: WhatsApp + call, always reachable — load-bearing conversion surface, not a footer afterthought.
+- Sticky bottom bar on mobile: "Foglalj szobát" (→ /foglalas/) + call, always reachable — load-bearing conversion surface, not a footer afterthought.
 - No hamburger-menu breadcrumb sprawl (see Differentiation, DDR #10). One page, anchor-scrolled sections: Welcome → Rooms → Location → Host note → Contact.
 
 ## Components
 
-- **CTA button (primary)**: solid --c-accent fill, --c-white text, PT Sans bold, --r-md corners. Reserved for WhatsApp/call/map — one visual language, repeated, never diluted with secondary-action styling.
+- **CTA button (primary)**: solid --c-accent fill, --c-white text, PT Sans bold, --r-md corners. Reserved for the booking button / call / map — one visual language, repeated, never diluted with secondary-action styling.
 - **Room card**: photo-forward, ivory card on --c-ground-alt, --shadow-card, headline in Playfair for room name, PT Sans for detail line.
 - **Language toggle**: small text pair "HU / UA", current language in --c-ink bold, inactive in --c-ink-soft 60% opacity. Top-right, persists via localStorage, no page reload.
 - **Host note block**: see Imperfection below.
 
 ## Motion
 
-- Minimal. Fade/slide-up on scroll-into-view for section headers only (200ms ease-out), not per-element stagger — editorial restraint, not a scroll-jacked showcase.
-- Button press: 100ms scale/opacity feedback, no bounce.
-- Language toggle swap: instant text swap, no transition — this is a utility action, not a moment.
+- Near-stillness (Luxury archetype): one deliberate movement, never a library, always gated by prefers-reduced-motion.
+- Hero entrance: one load animation on the hero text column — opacity 0→1 + 2–4px translate, 600–800ms ease. Once, on load.
+- Gallery hover: accent-colored 1px hairline border appears on the tile + its caption underlines. No scale, no bounce (hard ban).
+- Header: 1px border-bottom fades in after ~40px scroll (JS class toggle, no library).
+- Lightbox open/close: short opacity fade only, gated by reduced-motion.
+- Section-head reveal: fade/slide-up on scroll-into-view, section headers only (200ms ease-out) — not per-element stagger.
+- Button press: 100ms scale/opacity feedback, no bounce. Language toggle: instant text swap, no transition.
 
 ## Imagery
 
-- Real photography only, client's own — no stock. Warm natural light, consistent color grade toward the ivory/wine palette (desaturate blown highlights, avoid cool blue casts).
+- Real photography only, client's own — no stock. Warm natural light, graded toward the ivory/wine palette, no cool blue casts.
+- **CURRENT DEBT:** gallery/hero/feature photos are interim Google-thumbnail sources (max ~698px wide). The desktop full-bleed treatment will look soft until real client photography replaces them. This is accepted, documented debt — not a bug to chase. Image panels are width-capped (~760–820px) to limit upscaling artifacts in the meantime.
 - Room photos: wide-angle, daylight, uncluttered — sell the space, not props.
 - Exterior/location shots: establish Mala Byihan setting and proximity to Kosonь thermal springs context without needing copy to explain it.
+- Every not-yet-supplied image slot stays a labelled placeholder, never a finished-looking fake.
+- **Bookable rooms (7).** The booking subsystem exposes 7 rooms (see schema.sql seed). 5 reuse real photos already in the existing 13-photo set (caption keys `cap8`, `cap9`, `caph1`, `caph4`, `cap2`); the remaining 2 ("Szoba 6", "Szoba 7") are labelled striped placeholders pending real photography — never a finished-looking fake. Room descriptions are the literal placeholder `[LEÍRÁS: …]` / `[ОПИС: …]` per doctrine S7 until the client supplies real copy.
 
 ## Imperfection
 
 - Swash motif extracted from the client's existing calligraphic logo mark, used sparingly as a section divider glyph (not a repeating pattern/wallpaper).
 - Short handwritten-style host welcome note: a distinct script/signature face (not Playfair, not PT Sans — a third, tightly-scoped face used only here), framed as a personal note with the host's name signed. This is the one place personality overrides the typographic system's restraint — deliberately, once.
+
+## Secondary Design System — Booking Subsystem (/foglalas + /admin)
+
+**Named, approved exception — NOT token drift.** `/foglalas/` and `/admin/` intentionally use a DIFFERENT token set from the main editorial site. This is a deliberate fork approved by Mandy, not accidental drift. It exists so a future Section 8 QA pass (rubric #10, token consistency) does not flag these two surfaces as regressions: they are a separate, scoped subsystem with its own tokens. The main site (index.html) is unaffected and keeps the tokens above byte-for-byte.
+
+Rationale: the booking flow is a transactional, form-driven utility surface. A friendlier, rounder, brighter "app" vocabulary (teal + cream, Quicksand/Nunito, pill buttons) signals "safe to fill in a form" better than the restrained oxblood editorial system, which is tuned for browsing and brand feel.
+
+Scope: applies ONLY to `/foglalas/` and `/admin/`. It must never leak into index.html / base.css.
+
+Tokens (booking subsystem):
+```css
+--b-ground:  #FFFDF9;  /* cream ground */
+--b-surface: #F5EFE3;  /* coral/cream secondary surface (cards) */
+--b-primary: #1D9E75;  /* teal — primary accent: buttons, progress, active step */
+--b-primary-ink: #16805E; /* teal pressed/hover */
+--b-ink:     #1B3A34;  /* deep teal-ink text */
+--b-radius-card: 20px; /* cards 16–20px */
+--b-radius-pill: 99px; /* pills / buttons */
+```
+- Headline: **Quicksand 700**. Body: **Nunito 400/700**. (Glyph note: Quicksand's Cyrillic coverage is incomplete, so headline `font-family` falls back to Nunito — which is glyph-complete for HU latin-ext + UA cyrillic — ahead of any system font. No bare system fallback, glyph gate holds on both languages.)
+- Radius 16–20px on cards, 99px on pills/buttons. This is the one place rounded geometry is allowed; the main site stays at 2–4px.
+- Bilingual mechanism identical to the main site: HU default, JS toggle, localStorage-persisted, no auto-detect.
 
 ## Banned
 

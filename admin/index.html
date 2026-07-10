@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Foglaláskezelő — Apartment Beatrice</title>
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+  <!-- Internal tool, HU-only. Direct URL only — no link from the public site. -->
+
+  <!-- LOGIN -->
+  <main class="ad-login" data-role="login">
+    <form class="ad-login__box" data-role="loginForm">
+      <h1>Foglaláskezelő</h1>
+      <div class="ad-field">
+        <label for="pw">Jelszó</label>
+        <input type="password" id="pw" name="pw" autocomplete="current-password" required autofocus>
+      </div>
+      <p class="ad-error" data-role="loginErr" hidden>Helytelen jelszó.</p>
+      <button type="submit" class="ad-btn">Belépés</button>
+    </form>
+  </main>
+
+  <!-- DASHBOARD -->
+  <main class="ad-dash" data-role="dash" hidden>
+    <header class="ad-head">
+      <h1>Foglalások</h1>
+      <button type="button" class="ad-btn ad-btn--ghost" data-role="logout">Kilépés</button>
+    </header>
+
+    <div class="ad-toolbar">
+      <label for="filter">Szűrés státusz szerint</label>
+      <select id="filter" data-role="filter">
+        <option value="all">Mind</option>
+        <option value="pending">Függőben</option>
+        <option value="approved">Elfogadva</option>
+        <option value="rejected">Elutasítva</option>
+      </select>
+      <button type="button" class="ad-btn ad-btn--ghost" data-role="refresh">Frissítés</button>
+    </div>
+
+    <p class="ad-error" data-role="dashErr" hidden></p>
+    <p class="ad-empty" data-role="empty" hidden>Nincs megjeleníthető foglalás.</p>
+
+    <div class="ad-tablewrap">
+      <table class="ad-table">
+        <thead>
+          <tr>
+            <th scope="col">Beérkezett</th>
+            <th scope="col">Szoba</th>
+            <th scope="col">Vendég</th>
+            <th scope="col">Elérhetőség</th>
+            <th scope="col">Dátumok</th>
+            <th scope="col">Megjegyzés</th>
+            <th scope="col">Státusz</th>
+            <th scope="col">Művelet</th>
+          </tr>
+        </thead>
+        <tbody data-role="rows"></tbody>
+      </table>
+    </div>
+  </main>
+
+  <script src="admin.js"></script>
+</body>
+</html>

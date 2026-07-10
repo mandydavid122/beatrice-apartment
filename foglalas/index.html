@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Foglalj szobát az Apartment Beatrice panzióban — válassz dátumot és szobát, mi visszaigazoljuk.">
+  <meta name="robots" content="noindex">
+  <title>Foglalás — Apartment Beatrice</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="booking.css">
+</head>
+<body>
+
+  <header class="bk-header">
+    <a class="bk-back" href="/" data-i18n="backHome">← Vissza</a>
+    <nav class="bk-lang" aria-label="Nyelv / Мова">
+      <button class="bk-lang__btn" data-lang="hu" aria-pressed="true">HU</button>
+      <span aria-hidden="true">/</span>
+      <button class="bk-lang__btn" data-lang="ua" aria-pressed="false">UA</button>
+    </nav>
+  </header>
+
+  <main class="bk-main">
+    <h1 class="bk-title" data-i18n="pageTitle">Foglalj szobát</h1>
+
+    <!-- progress indicator -->
+    <ol class="bk-steps" aria-label="Foglalási lépések">
+      <li class="bk-step is-active" data-step-ind="1"><span class="bk-step__num">1</span><span class="bk-step__label" data-i18n="step1Label">Dátum</span></li>
+      <li class="bk-step" data-step-ind="2"><span class="bk-step__num">2</span><span class="bk-step__label" data-i18n="step2Label">Szoba</span></li>
+      <li class="bk-step" data-step-ind="3"><span class="bk-step__num">3</span><span class="bk-step__label" data-i18n="step3Label">Adatok</span></li>
+    </ol>
+
+    <!-- STEP 1 — dates -->
+    <section class="bk-panel is-active" data-step="1" aria-labelledby="s1h">
+      <h2 id="s1h" class="bk-panel__title" data-i18n="s1Title">Mikor jönnél?</h2>
+      <div class="bk-field">
+        <label for="checkIn" data-i18n="labelCheckIn">Érkezés</label>
+        <input type="date" id="checkIn" required>
+      </div>
+      <div class="bk-field">
+        <label for="checkOut" data-i18n="labelCheckOut">Távozás</label>
+        <input type="date" id="checkOut" required>
+      </div>
+      <p class="bk-error" data-role="err1" hidden></p>
+      <button type="button" class="bk-btn" data-action="to2" data-i18n="next">Tovább</button>
+    </section>
+
+    <!-- STEP 2 — room selection -->
+    <section class="bk-panel" data-step="2" aria-labelledby="s2h">
+      <h2 id="s2h" class="bk-panel__title" data-i18n="s2Title">Válassz szobát</h2>
+      <p class="bk-note" data-role="dateSummary"></p>
+      <p class="bk-error" data-role="err2" hidden></p>
+      <div class="bk-rooms" data-role="rooms" aria-live="polite"></div>
+      <div class="bk-nav">
+        <button type="button" class="bk-btn bk-btn--ghost" data-action="back1" data-i18n="back">Vissza</button>
+      </div>
+    </section>
+
+    <!-- STEP 3 — contact form -->
+    <section class="bk-panel" data-step="3" aria-labelledby="s3h">
+      <h2 id="s3h" class="bk-panel__title" data-i18n="s3Title">Add meg az elérhetőséged</h2>
+      <p class="bk-note" data-role="bookingSummary"></p>
+      <form class="bk-form" data-role="form" novalidate>
+        <div class="bk-field">
+          <label for="guestName" data-i18n="labelName">Név</label>
+          <input type="text" id="guestName" name="guestName" autocomplete="name" required>
+        </div>
+        <div class="bk-field">
+          <label for="guestContact" data-i18n="labelContact">Telefon vagy e-mail</label>
+          <input type="text" id="guestContact" name="guestContact" autocomplete="email" required>
+        </div>
+        <div class="bk-field">
+          <label for="guestNote" data-i18n="labelNote">Megjegyzés (nem kötelező)</label>
+          <textarea id="guestNote" name="guestNote" rows="3"></textarea>
+        </div>
+        <!-- honeypot: hidden from humans, bots fill it -->
+        <div class="bk-hp" aria-hidden="true">
+          <label for="company">Company</label>
+          <input type="text" id="company" name="company" tabindex="-1" autocomplete="off">
+        </div>
+        <p class="bk-error" data-role="err3" hidden></p>
+        <div class="bk-nav">
+          <button type="button" class="bk-btn bk-btn--ghost" data-action="back2" data-i18n="back">Vissza</button>
+          <button type="submit" class="bk-btn" data-role="submit" data-i18n="submit">Foglalás elküldése</button>
+        </div>
+      </form>
+    </section>
+
+    <!-- SUCCESS -->
+    <section class="bk-panel bk-success" data-step="done" aria-labelledby="doneh" role="status">
+      <div class="bk-success__mark" aria-hidden="true">✓</div>
+      <h2 id="doneh" class="bk-panel__title" data-i18n="doneTitle">Köszönjük!</h2>
+      <p data-role="doneText"></p>
+      <a class="bk-btn bk-btn--ghost" href="/" data-i18n="backHome">← Vissza a főoldalra</a>
+    </section>
+  </main>
+
+  <script src="booking.js"></script>
+</body>
+</html>

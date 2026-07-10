@@ -6,7 +6,7 @@
   <meta name="description" content="Apartment Beatrice — családi apartman Kis Bégányban, a kosonyi termálfürdők közelében. Nyugodt, családias szállás Kárpátalján.">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Apartment Beatrice — Kis Bégány, Kárpátalja">
-  <meta property="og:description" content="Családi apartman a kosonyi termálfürdők közelében. Írj WhatsAppon a szabad időpontokért.">
+  <meta property="og:description" content="Családi apartman a kosonyi termálfürdők közelében. Foglalj szobát online a szabad időpontokra.">
   <meta property="og:image" content="/assets/n3-1200.webp">
   <meta property="og:locale" content="hu_HU">
   <meta property="og:locale:alternate" content="uk_UA">
@@ -18,6 +18,25 @@
 
   <!-- LCP hero image preload -->
   <link rel="preload" as="image" href="/assets/n3-1200.webp" imagesrcset="/assets/n3-480.webp 480w, /assets/n3-1200.webp 620w" imagesizes="(max-width:672px) 100vw, 640px" fetchpriority="high">
+
+  <!-- GDPR consent banner styles — scoped classes, no overlap with base.css tokens -->
+  <style>
+    .consent {
+      position: fixed; left: 0; right: 0; bottom: 0; z-index: 60;
+      display: flex; flex-wrap: wrap; align-items: center; gap: 12px;
+      padding: 16px 24px calc(16px + env(safe-area-inset-bottom, 0px));
+      background: #6E2A20; color: #F7F3EA;
+      font-family: "PT Sans", sans-serif; font-size: 0.9375rem; line-height: 1.5;
+      box-shadow: 0 -1px 8px rgba(0,0,0,0.18);
+    }
+    .consent[hidden] { display: none; }
+    .consent__text { margin: 0; flex: 1 1 260px; }
+    .consent__actions { display: flex; gap: 8px; flex: 0 0 auto; }
+    .consent .btn { padding: 10px 20px; font-size: 0.875rem; }
+    .consent .btn--ghost { border-color: #F7F3EA; color: #F7F3EA; }
+    /* keep the banner clear of the mobile sticky conversion bar */
+    @media (max-width: 719px) { .consent { bottom: 56px; } }
+  </style>
 
   <!-- base.css loads LAST — cascade order law C1 -->
   <link rel="stylesheet" href="base.css">
@@ -39,22 +58,24 @@
   <main>
 
   <!-- ===== HERO ===== -->
-  <section class="hero wrap">
-    <div class="eyebrow" data-i18n="heroEyebrow"></div>
-    <img class="hero__mark" src="/assets/logo.jpg" alt="Apartment Beatrice — AB monogram">
-    <svg class="swash" viewBox="0 0 220 36" aria-hidden="true">
-      <path d="M6 26 C 46 2, 90 34, 130 10 S 196 2, 214 16" fill="none" stroke-width="2.5" stroke-linecap="round"></path>
-    </svg>
-    <h1 class="hero__tagline" data-i18n="heroTagline"></h1>
-    <p class="hero__sub" data-i18n="heroSubcopy"></p>
-    <div class="cta-row">
-      <a class="btn btn--primary" data-link="wa" target="_blank" rel="noopener" data-i18n="ctaWhatsapp"></a>
-      <a class="btn btn--ghost" data-link="tel" data-i18n="ctaCall"></a>
-      <a class="btn btn--ghost" data-link="maps" target="_blank" rel="noopener" data-i18n="ctaMaps"></a>
+  <section class="hero">
+    <div class="hero__text">
+      <div class="eyebrow" data-i18n="heroEyebrow"></div>
+      <img class="hero__mark" src="/assets/logo.jpg" alt="Apartment Beatrice — AB monogram">
+      <svg class="swash" viewBox="0 0 220 36" aria-hidden="true">
+        <path d="M6 26 C 46 2, 90 34, 130 10 S 196 2, 214 16" fill="none" stroke-width="2.5" stroke-linecap="round"></path>
+      </svg>
+      <h1 class="hero__tagline" data-i18n="heroTagline"></h1>
+      <p class="hero__sub" data-i18n="heroSubcopy"></p>
+      <div class="cta-row">
+        <a class="btn btn--primary" href="/foglalas/" data-i18n="ctaBookRoom"></a>
+        <a class="btn btn--ghost" data-link="tel" data-i18n="ctaCall"></a>
+        <a class="btn btn--ghost" data-link="maps" target="_blank" rel="noopener" data-i18n="ctaMaps"></a>
+      </div>
+      <div class="meta hero__price" data-i18n="priceLine"></div>
     </div>
-    <div class="meta hero__price" data-i18n="priceLine"></div>
     <figure class="hero__figure">
-      <img class="hero__photo" src="/assets/n3-1200.webp" srcset="/assets/n3-480.webp 480w, /assets/n3-1200.webp 620w" sizes="(max-width:672px) 100vw, 640px" width="620" height="465" fetchpriority="high" decoding="async" data-alt="cap3" alt="A vendégház és a bejárat">
+      <img class="hero__photo" src="/assets/n3-1200.webp" srcset="/assets/n3-480.webp 480w, /assets/n3-1200.webp 620w" sizes="(min-width:900px) 800px, (max-width:672px) 100vw, 640px" width="620" height="465" fetchpriority="high" decoding="async" data-alt="cap3" alt="A vendégház és a bejárat">
     </figure>
   </section>
 
@@ -102,62 +123,88 @@
 
   <!-- ===== GALLERY ===== -->
   <section class="band band--alt">
-    <div class="wrap">
+    <div class="wrap gallery-wrap">
       <div class="section-head reveal" style="text-align:left">
         <h2 data-i18n="galleryTitle"></h2>
         <p class="meta" data-i18n="galleryNote"></p>
       </div>
       <div class="gallery">
         <figure class="gallery__item gallery__item--wide">
-          <img src="/assets/n3-1200.webp" srcset="/assets/n3-480.webp 480w, /assets/n3-1200.webp 620w" sizes="(max-width:672px) 92vw, 620px" width="620" height="465" loading="lazy" decoding="async" data-alt="cap3" alt="A vendégház és a bejárat">
+          <button type="button" class="gallery__btn" data-lb-index="0" aria-label="Nagyítás / Збільшити">
+            <img src="/assets/n3-1200.webp" srcset="/assets/n3-480.webp 480w, /assets/n3-1200.webp 620w" sizes="(max-width:672px) 92vw, 620px" width="620" height="465" loading="lazy" decoding="async" data-alt="cap3" alt="A vendégház és a bejárat">
+          </button>
           <figcaption class="gallery__cap" data-i18n="cap3"></figcaption>
         </figure>
         <figure class="gallery__item">
-          <img src="/assets/n4-1200.webp" srcset="/assets/n4-480.webp 480w, /assets/n4-1200.webp 698w" sizes="(max-width:672px) 45vw, 300px" width="698" height="931" loading="lazy" decoding="async" data-alt="cap4" alt="Fedett terasz">
+          <button type="button" class="gallery__btn" data-lb-index="1" aria-label="Nagyítás / Збільшити">
+            <img src="/assets/n4-1200.webp" srcset="/assets/n4-480.webp 480w, /assets/n4-1200.webp 698w" sizes="(max-width:672px) 45vw, 300px" width="698" height="931" loading="lazy" decoding="async" data-alt="cap4" alt="Fedett terasz">
+          </button>
           <figcaption class="gallery__cap" data-i18n="cap4"></figcaption>
         </figure>
         <figure class="gallery__item">
-          <img src="/assets/n5-1200.webp" srcset="/assets/n5-480.webp 480w, /assets/n5-1200.webp 524w" sizes="(max-width:672px) 45vw, 300px" width="524" height="699" loading="lazy" decoding="async" data-alt="cap5" alt="Közös helyiség">
+          <button type="button" class="gallery__btn" data-lb-index="2" aria-label="Nagyítás / Збільшити">
+            <img src="/assets/n5-1200.webp" srcset="/assets/n5-480.webp 480w, /assets/n5-1200.webp 524w" sizes="(max-width:672px) 45vw, 300px" width="524" height="699" loading="lazy" decoding="async" data-alt="cap5" alt="Közös helyiség">
+          </button>
           <figcaption class="gallery__cap" data-i18n="cap5"></figcaption>
         </figure>
         <figure class="gallery__item">
-          <img src="/assets/n8-1200.webp" srcset="/assets/n8-480.webp 480w, /assets/n8-1200.webp 532w" sizes="(max-width:672px) 45vw, 300px" width="532" height="399" loading="lazy" decoding="async" data-alt="cap8" alt="Szoba saját fürdővel">
+          <button type="button" class="gallery__btn" data-lb-index="3" aria-label="Nagyítás / Збільшити">
+            <img src="/assets/n8-1200.webp" srcset="/assets/n8-480.webp 480w, /assets/n8-1200.webp 532w" sizes="(max-width:672px) 45vw, 300px" width="532" height="399" loading="lazy" decoding="async" data-alt="cap8" alt="Szoba saját fürdővel">
+          </button>
           <figcaption class="gallery__cap" data-i18n="cap8"></figcaption>
         </figure>
         <figure class="gallery__item">
-          <img src="/assets/n2-1200.webp" srcset="/assets/n2-480.webp 480w, /assets/n2-1200.webp 698w" sizes="(max-width:672px) 45vw, 300px" width="698" height="931" loading="lazy" decoding="async" data-alt="cap2" alt="Hangulatos hálószoba">
+          <button type="button" class="gallery__btn" data-lb-index="4" aria-label="Nagyítás / Збільшити">
+            <img src="/assets/n2-1200.webp" srcset="/assets/n2-480.webp 480w, /assets/n2-1200.webp 698w" sizes="(max-width:672px) 45vw, 300px" width="698" height="931" loading="lazy" decoding="async" data-alt="cap2" alt="Hangulatos hálószoba">
+          </button>
           <figcaption class="gallery__cap" data-i18n="cap2"></figcaption>
         </figure>
         <figure class="gallery__item">
-          <img src="/assets/n6-1200.webp" srcset="/assets/n6-480.webp 480w, /assets/n6-1200.webp 625w" sizes="(max-width:672px) 45vw, 300px" width="625" height="465" loading="lazy" decoding="async" data-alt="cap6" alt="Konyha">
+          <button type="button" class="gallery__btn" data-lb-index="5" aria-label="Nagyítás / Збільшити">
+            <img src="/assets/n6-1200.webp" srcset="/assets/n6-480.webp 480w, /assets/n6-1200.webp 625w" sizes="(max-width:672px) 45vw, 300px" width="625" height="465" loading="lazy" decoding="async" data-alt="cap6" alt="Konyha">
+          </button>
           <figcaption class="gallery__cap" data-i18n="cap6"></figcaption>
         </figure>
         <figure class="gallery__item">
-          <img src="/assets/n7-1200.webp" srcset="/assets/n7-480.webp 480w, /assets/n7-1200.webp 532w" sizes="(max-width:672px) 45vw, 300px" width="532" height="399" loading="lazy" decoding="async" data-alt="cap7" alt="Gondozott kert">
+          <button type="button" class="gallery__btn" data-lb-index="6" aria-label="Nagyítás / Збільшити">
+            <img src="/assets/n7-1200.webp" srcset="/assets/n7-480.webp 480w, /assets/n7-1200.webp 532w" sizes="(max-width:672px) 45vw, 300px" width="532" height="399" loading="lazy" decoding="async" data-alt="cap7" alt="Gondozott kert">
+          </button>
           <figcaption class="gallery__cap" data-i18n="cap7"></figcaption>
         </figure>
         <figure class="gallery__item">
-          <img src="/assets/n1-1200.webp" srcset="/assets/n1-1200.webp 419w" sizes="(max-width:672px) 45vw, 300px" width="419" height="465" loading="lazy" decoding="async" data-alt="cap1" alt="Kert és bejárat">
+          <button type="button" class="gallery__btn" data-lb-index="7" aria-label="Nagyítás / Збільшити">
+            <img src="/assets/n1-1200.webp" srcset="/assets/n1-1200.webp 419w" sizes="(max-width:672px) 45vw, 300px" width="419" height="465" loading="lazy" decoding="async" data-alt="cap1" alt="Kert és bejárat">
+          </button>
           <figcaption class="gallery__cap" data-i18n="cap1"></figcaption>
         </figure>
         <figure class="gallery__item">
-          <img src="/assets/n9-1200.webp" srcset="/assets/n9-480.webp 480w, /assets/n9-1200.webp 698w" sizes="(max-width:672px) 45vw, 300px" width="698" height="931" loading="lazy" decoding="async" data-alt="cap9" alt="Családi szoba">
+          <button type="button" class="gallery__btn" data-lb-index="8" aria-label="Nagyítás / Збільшити">
+            <img src="/assets/n9-1200.webp" srcset="/assets/n9-480.webp 480w, /assets/n9-1200.webp 698w" sizes="(max-width:672px) 45vw, 300px" width="698" height="931" loading="lazy" decoding="async" data-alt="cap9" alt="Családi szoba">
+          </button>
           <figcaption class="gallery__cap" data-i18n="cap9"></figcaption>
         </figure>
         <figure class="gallery__item">
-          <img src="/assets/h1-1200.webp" srcset="/assets/h1-1200.webp 465w" sizes="(max-width:672px) 45vw, 300px" width="465" height="465" loading="lazy" decoding="async" data-alt="caph1" alt="Hálószoba">
+          <button type="button" class="gallery__btn" data-lb-index="9" aria-label="Nagyítás / Збільшити">
+            <img src="/assets/h1-1200.webp" srcset="/assets/h1-1200.webp 465w" sizes="(max-width:672px) 45vw, 300px" width="465" height="465" loading="lazy" decoding="async" data-alt="caph1" alt="Hálószoba">
+          </button>
           <figcaption class="gallery__cap" data-i18n="caph1"></figcaption>
         </figure>
         <figure class="gallery__item">
-          <img src="/assets/h2-1200.webp" srcset="/assets/h2-480.webp 480w, /assets/h2-1200.webp 524w" sizes="(max-width:672px) 45vw, 300px" width="524" height="699" loading="lazy" decoding="async" data-alt="caph2" alt="Fürdőszoba zuhanyzóval">
+          <button type="button" class="gallery__btn" data-lb-index="10" aria-label="Nagyítás / Збільшити">
+            <img src="/assets/h2-1200.webp" srcset="/assets/h2-480.webp 480w, /assets/h2-1200.webp 524w" sizes="(max-width:672px) 45vw, 300px" width="524" height="699" loading="lazy" decoding="async" data-alt="caph2" alt="Fürdőszoba zuhanyzóval">
+          </button>
           <figcaption class="gallery__cap" data-i18n="caph2"></figcaption>
         </figure>
         <figure class="gallery__item">
-          <img src="/assets/h3-1200.webp" srcset="/assets/h3-1200.webp 418w" sizes="(max-width:672px) 45vw, 300px" width="418" height="558" loading="lazy" decoding="async" data-alt="caph3" alt="Kerti tó">
+          <button type="button" class="gallery__btn" data-lb-index="11" aria-label="Nagyítás / Збільшити">
+            <img src="/assets/h3-1200.webp" srcset="/assets/h3-1200.webp 418w" sizes="(max-width:672px) 45vw, 300px" width="418" height="558" loading="lazy" decoding="async" data-alt="caph3" alt="Kerti tó">
+          </button>
           <figcaption class="gallery__cap" data-i18n="caph3"></figcaption>
         </figure>
         <figure class="gallery__item">
-          <img src="/assets/h4-1200.webp" srcset="/assets/h4-480.webp 480w, /assets/h4-1200.webp 539w" sizes="(max-width:672px) 45vw, 300px" width="539" height="399" loading="lazy" decoding="async" data-alt="caph4" alt="Hálószoba">
+          <button type="button" class="gallery__btn" data-lb-index="12" aria-label="Nagyítás / Збільшити">
+            <img src="/assets/h4-1200.webp" srcset="/assets/h4-480.webp 480w, /assets/h4-1200.webp 539w" sizes="(max-width:672px) 45vw, 300px" width="539" height="399" loading="lazy" decoding="async" data-alt="caph4" alt="Hálószoba">
+          </button>
           <figcaption class="gallery__cap" data-i18n="caph4"></figcaption>
         </figure>
       </div>
@@ -189,7 +236,7 @@
       <h2 data-i18n="bookingTitle"></h2>
       <p class="meta" data-i18n="priceLine"></p>
       <div class="cta-row">
-        <a class="btn btn--primary" data-link="wa" target="_blank" rel="noopener" data-i18n="ctaWhatsapp"></a>
+        <a class="btn btn--primary" href="/foglalas/" data-i18n="ctaBookRoom"></a>
         <a class="btn btn--ghost" data-link="tel" data-i18n="ctaCall"></a>
       </div>
     </div>
@@ -213,9 +260,35 @@
 
   <!-- ===== STICKY MOBILE CONVERSION BAR ===== -->
   <nav class="stickybar" aria-label="Foglalás / Бронювання">
-    <a class="btn btn--primary" data-link="wa" target="_blank" rel="noopener" data-i18n="ctaWhatsapp"></a>
+    <a class="btn btn--primary" href="/foglalas/" data-i18n="ctaBookRoom"></a>
     <a class="btn btn--ghost" data-link="tel" data-i18n="ctaCall"></a>
   </nav>
+
+  <!-- ===== LIGHTBOX (native <dialog>) ===== -->
+  <dialog class="lightbox" aria-label="Galéria / Галерея">
+    <button type="button" class="lightbox__close" data-lb="close" aria-label="Bezárás / Закрити">
+      <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><path d="M6 6 L18 18 M18 6 L6 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path></svg>
+    </button>
+    <button type="button" class="lightbox__nav lightbox__prev" data-lb="prev" aria-label="Előző / Попереднє">
+      <svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true"><path d="M15 5 L8 12 L15 19" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+    </button>
+    <figure class="lightbox__figure">
+      <img class="lightbox__img" alt="">
+      <figcaption class="lightbox__cap"></figcaption>
+    </figure>
+    <button type="button" class="lightbox__nav lightbox__next" data-lb="next" aria-label="Következő / Наступне">
+      <svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true"><path d="M9 5 L16 12 L9 19" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+    </button>
+  </dialog>
+
+  <!-- ===== GDPR COOKIE CONSENT ===== -->
+  <div class="consent" role="dialog" aria-live="polite" aria-label="Süti hozzájárulás / Згода на файли cookie" hidden>
+    <p class="consent__text"></p>
+    <div class="consent__actions">
+      <button type="button" class="btn btn--primary consent__accept"></button>
+      <button type="button" class="btn btn--ghost consent__decline"></button>
+    </div>
+  </div>
 
   <!-- ===== SCROLL TO TOP ===== -->
   <button class="totop" type="button" aria-label="Vissza a tetejére / Нагору" hidden>
@@ -225,5 +298,6 @@
   </button>
 
   <script src="app.js"></script>
+  <script src="consent.js"></script>
 </body>
 </html>
