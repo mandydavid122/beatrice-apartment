@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=PT+Sans:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; background: #F7F3EA; }
+    ::selection { background: #6E2E23; color: #F7F3EA; }
+  </style>
+</helmet>
+
+<div style="background:#F7F3EA; color:#6E2E23; font-family:'PT Sans',sans-serif; line-height:1.55; overflow-x:hidden;">
+
+  <!-- ===== TOP BAR ===== -->
+  <div data-screen-label="Header" style="position:sticky; top:0; z-index:40; display:flex; align-items:center; justify-content:space-between; padding:16px 24px; background:rgba(247,243,234,0.92); backdrop-filter:blur(6px); border-bottom:1px solid color-mix(in oklch, #6E2E23 18%, #F7F3EA);">
+    <img src="uploads/logo.jpg" alt="Apartment Beatrice" style="height:40px; width:auto; mix-blend-mode:multiply;" />
+    <div style="display:flex; align-items:center; gap:8px;">
+      <button onClick="{{ setHu }}" style="{{ huPillStyle }}">HU</button>
+      <button onClick="{{ setUa }}" style="{{ uaPillStyle }}">UA</button>
+    </div>
+  </div>
+
+  <!-- ===== HERO ===== -->
+  <div data-screen-label="Hero" style="min-height:88vh; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:64px 24px 48px; gap:24px;">
+    <div style="font-family:'PT Sans',sans-serif; letter-spacing:0.16em; text-transform:uppercase; font-size:13px; color:color-mix(in oklch, #6E2E23 60%, #F7F3EA);">{{ heroEyebrow }}</div>
+    <img src="uploads/logo.jpg" alt="Apartment Beatrice — AB monogram" style="width:min(320px, 60vw); height:auto; mix-blend-mode:multiply;" />
+    <svg viewBox="0 0 220 36" style="width:160px; height:auto;" aria-hidden="true">
+      <path d="M6 26 C 46 2, 90 34, 130 10 S 196 2, 214 16" fill="none" stroke="oklch(68% 0.09 75)" stroke-width="2.5" stroke-linecap="round"></path>
+    </svg>
+    <p style="font-family:'Playfair Display', serif; font-style:italic; font-size:clamp(22px,3.4vw,32px); max-width:640px; margin:0; color:#6E2E23;">{{ heroTagline }}</p>
+    <p style="max-width:520px; margin:0; font-size:17px; color:color-mix(in oklch, #6E2E23 72%, #F7F3EA);">{{ heroSubcopy }}</p>
+    <div style="display:flex; flex-wrap:wrap; gap:16px; align-items:center; justify-content:center; margin-top:8px;">
+      <a href="{{ waLink }}" target="_blank" rel="noopener" style="{{ ctaPrimaryStyle }}" style-hover="{{ ctaPrimaryHoverStyle }}">{{ ctaWhatsapp }}</a>
+      <a href="{{ telLink }}" style="{{ ctaSecondaryStyle }}">{{ ctaCall }}</a>
+      <a href="{{ mapsLink }}" target="_blank" rel="noopener" style="{{ ctaSecondaryStyle }}">{{ ctaMaps }}</a>
+    </div>
+    <div style="margin-top:16px; font-size:14px; color:color-mix(in oklch, #6E2E23 55%, #F7F3EA);">{{ priceLine }}</div>
+  </div>
+
+  <!-- ===== HOST WELCOME (imperfection: handwritten voice, off-center) ===== -->
+  <!-- TODO: human review UA -->
+  <div data-screen-label="Host welcome" style="background:#6E2E23; color:#F7F3EA; padding:96px 24px;">
+    <div style="max-width:900px; margin:0 auto; display:flex; justify-content:flex-end;">
+      <div style="max-width:520px; text-align:left;">
+        <p style="font-family:'Playfair Display', serif; font-style:italic; font-size:clamp(24px,3vw,30px); margin:0 0 24px;">{{ hostWelcome }}</p>
+        <p style="font-family:'Playfair Display', serif; font-style:italic; font-size:17px; margin:0; color:color-mix(in oklch, #F7F3EA 75%, #6E2E23);">{{ hostSignoff }}</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== ROOMS & SPACES ===== -->
+  <div data-screen-label="Rooms and spaces" style="padding:96px 24px 32px; max-width:1100px; margin:0 auto;">
+    <div style="display:flex; justify-content:center; margin-bottom:24px;">
+      <svg viewBox="0 0 220 36" style="width:140px; height:auto; transform:scaleY(-1);" aria-hidden="true">
+        <path d="M6 26 C 46 2, 90 34, 130 10 S 196 2, 214 16" fill="none" stroke="oklch(68% 0.09 75)" stroke-width="2.5" stroke-linecap="round"></path>
+      </svg>
+    </div>
+    <h2 style="font-family:'Playfair Display', serif; font-weight:600; font-size:clamp(30px,4vw,44px); text-align:center; margin:0 0 64px;">{{ roomsTitle }}</h2>
+
+    <div style="display:grid; grid-template-columns:1.1fr 0.9fr; gap:48px; align-items:center; margin-bottom:80px;">
+      <div>
+        <h3 style="font-family:'Playfair Display', serif; font-size:24px; margin:0 0 12px;">{{ room1Title }}</h3>
+        <p style="margin:0; color:color-mix(in oklch, #6E2E23 78%, #F7F3EA); font-size:16px;">{{ room1Copy }}</p>
+      </div>
+      <div style="{{ placeholderStyle }} aspect-ratio:4/3;">
+        <span style="{{ placeholderLabelStyle }}">{{ photoLabelInterior }}</span>
+      </div>
+    </div>
+
+    <div style="display:grid; grid-template-columns:0.9fr 1.1fr; gap:48px; align-items:center;">
+      <div style="{{ placeholderStyle }} aspect-ratio:4/3; order:1;">
+        <span style="{{ placeholderLabelStyle }}">{{ photoLabelKitchen }}</span>
+      </div>
+      <div style="order:2;">
+        <h3 style="font-family:'Playfair Display', serif; font-size:24px; margin:0 0 12px;">{{ room2Title }}</h3>
+        <p style="margin:0; color:color-mix(in oklch, #6E2E23 78%, #F7F3EA); font-size:16px;">{{ room2Copy }}</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== GALLERY ===== -->
+  <div data-screen-label="Gallery" style="padding:96px 24px; max-width:1100px; margin:0 auto;">
+    <h2 style="font-family:'Playfair Display', serif; font-weight:600; font-size:clamp(28px,3.6vw,40px); margin:0 0 8px;">{{ galleryTitle }}</h2>
+    <p style="margin:0 0 40px; color:color-mix(in oklch, #6E2E23 62%, #F7F3EA); font-size:15px;">{{ galleryNote }}</p>
+    <div style="display:grid; grid-template-columns:repeat(6, 1fr); grid-auto-rows:120px; gap:16px;">
+      <div style="{{ placeholderStyle }} grid-column:span 3; grid-row:span 2;"><span style="{{ placeholderLabelStyle }}">{{ photoLabelExterior }}</span></div>
+      <div style="{{ placeholderStyle }} grid-column:span 3; grid-row:span 1;"><span style="{{ placeholderLabelStyle }}">{{ photoLabelBedroom }}</span></div>
+      <div style="{{ placeholderStyle }} grid-column:span 3; grid-row:span 1;"><span style="{{ placeholderLabelStyle }}">{{ photoLabelBathroom }}</span></div>
+      <div style="{{ placeholderStyle }} grid-column:span 2; grid-row:span 2;"><span style="{{ placeholderLabelStyle }}">{{ photoLabelDetail }}</span></div>
+      <div style="{{ placeholderStyle }} grid-column:span 4; grid-row:span 2;"><span style="{{ placeholderLabelStyle }}">{{ photoLabelSprings }}</span></div>
+    </div>
+  </div>
+
+  <!-- ===== LOCATION ===== -->
+  <div data-screen-label="Location" style="padding:96px 24px; background:color-mix(in oklch, #6E2E23 6%, #F7F3EA);">
+    <div style="max-width:1100px; margin:0 auto; display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:start;">
+      <div>
+        <h2 style="font-family:'Playfair Display', serif; font-weight:600; font-size:clamp(28px,3.6vw,40px); margin:0 0 20px;">{{ locationTitle }}</h2>
+        <p style="margin:0 0 24px; font-size:16px; color:color-mix(in oklch, #6E2E23 78%, #F7F3EA); max-width:440px;">{{ locationCopy }}</p>
+        <div style="font-size:15px; line-height:1.8;">
+          <div>{{ napName }}</div>
+          <div>{{ napAddress }}</div>
+          <div>{{ napPhone }}</div>
+        </div>
+        <a href="{{ mapsLink }}" target="_blank" rel="noopener" style="{{ ctaSecondaryStyle }} margin-top:24px; display:inline-block;">{{ ctaMaps }}</a>
+      </div>
+      <div style="{{ placeholderStyle }} aspect-ratio:1/1;">
+        <span style="{{ placeholderLabelStyle }}">{{ mapLabel }}</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== BOOKING STRIP ===== -->
+  <div data-screen-label="Booking" style="background:#6E2E23; color:#F7F3EA; padding:64px 24px; text-align:center;">
+    <h2 style="font-family:'Playfair Display', serif; font-weight:500; font-style:italic; font-size:clamp(24px,3vw,32px); margin:0 0 12px;">{{ bookingTitle }}</h2>
+    <p style="margin:0 0 32px; font-size:15px; color:color-mix(in oklch, #F7F3EA 78%, #6E2E23);">{{ priceLine }}</p>
+    <div style="display:flex; flex-wrap:wrap; gap:16px; align-items:center; justify-content:center;">
+      <a href="{{ waLink }}" target="_blank" rel="noopener" style="{{ ctaPrimaryStyle }}">{{ ctaWhatsapp }}</a>
+      <a href="{{ telLink }}" style="{{ ctaSecondaryOnDarkStyle }}">{{ ctaCall }}</a>
+    </div>
+  </div>
+
+  <!-- ===== FOOTER ===== -->
+  <div data-screen-label="Footer" style="padding:48px 24px 64px; text-align:center;">
+    <img src="uploads/logo.jpg" alt="Apartment Beatrice" style="height:56px; width:auto; mix-blend-mode:multiply; margin-bottom:16px;" />
+    <div style="font-size:14px; color:color-mix(in oklch, #6E2E23 68%, #F7F3EA); line-height:1.9;">
+      <div>{{ napAddress }}</div>
+      <div>{{ napPhone }} · {{ napEmail }}</div>
+      <div style="margin-top:8px;">
+        <a href="https://facebook.com/people/Apartment-Beatrice/61577018919822" target="_blank" rel="noopener" style="{{ footerLinkStyle }}">Facebook</a>
+        <span style="margin:0 8px;">·</span>
+        <a href="https://instagram.com/apartmentbeatrice" target="_blank" rel="noopener" style="{{ footerLinkStyle }}">Instagram</a>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { lang: 'hu' };
+
+  // Copy dictionary. UA values are machine-translated drafts.
+  // TODO: human review UA — every *_ua entry below needs a native-speaker pass before launch.
+  static COPY = {
+    heroEyebrow: { hu: 'Kárpátalja · Mala Bijhány', ua: 'Закарпаття · Мала Бийгань' },
+    heroTagline: {
+      hu: 'Otthon, amit a családunk épített — most a tiétek is.',
+      ua: 'Дім, який збудувала наша родина — тепер і ваш.'
+    },
+    heroSubcopy: {
+      hu: 'Apartman szállás Mala Bijhányban, a kosonyi termálfürdők közelében. Nyugodt, családias, valódi — nem egy lista a sok közül.',
+      ua: 'Апартаменти в Малій Бийгані, поруч із косоньськими термальними водами. Спокійно, по-сімейному, по-справжньому — а не рядок у каталозі.'
+    },
+    ctaWhatsapp: { hu: 'Írj WhatsAppon', ua: 'Написати у WhatsApp' },
+    ctaCall: { hu: 'Hívás', ua: 'Подзвонити' },
+    ctaMaps: { hu: 'Útvonal', ua: 'Маршрут' },
+    priceLine: {
+      hu: '1200–1500 UAH / éjszaka / apartman (kb. 11 000–14 000 HUF)',
+      ua: '1200–1500 грн / ніч / апартаменти (прибл. 11 000–14 000 HUF)'
+    },
+    waMessage: {
+      hu: 'Szia! Érdeklődnék az Apartment Beatrice szabad időpontjairól.',
+      ua: 'Вітаю! Цікавлюсь наявністю вільних дат в Apartment Beatrice.'
+    },
+    hostWelcome: {
+      hu: '„Ez nem szálloda — ez a mi házunk egyik lakása. Amikor megérkeztek, a saját bejáraton léptek be, és onnantól annyi csendet és figyelmet kaptok, amennyire szükségetek van.”',
+      ua: '«Це не готель — це квартира в нашому будинку. Коли приїдете, зайдете через окремий вхід, і далі — стільки тиші й уваги, скільки вам треба.»'
+    },
+    hostSignoff: { hu: '— az Apartment Beatrice házigazdái', ua: '— господарі Apartment Beatrice' },
+    roomsTitle: { hu: 'Terek', ua: 'Простори' },
+    room1Title: { hu: 'Nappali és háló', ua: 'Вітальня та спальня' },
+    room1Copy: {
+      hu: 'Egybenyitott, világos tér pihenésre és étkezésre — annyi hellyel, hogy ne kelljen egymás lábán állni, de elég összezártan ahhoz, hogy otthonos maradjon.',
+      ua: 'Світлий об’єднаний простір для відпочинку та трапези — достатньо місця, щоб не заважати одне одному, і достатньо компактно, щоб залишалось затишно.'
+    },
+    room2Title: { hu: 'Kis konyha', ua: 'Кухня' },
+    room2Copy: {
+      hu: 'Felszerelt kis konyha a mindennapi főzéshez — reggeli kávé, egyszerű vacsora, semmi felesleges.',
+      ua: 'Обладнана невелика кухня для щоденного приготування їжі — ранкова кава, проста вечеря, нічого зайвого.'
+    },
+    galleryTitle: { hu: 'Galéria', ua: 'Галерея' },
+    galleryNote: {
+      hu: '[MEGJEGYZÉS: jelenlegi képek internetes helyettesítő fotók — valódi felvételek hamarosan]',
+      ua: '[ПРИМІТКА: наразі використано тимчасові фото з інтернету — реальні фотографії скоро]'
+    },
+    locationTitle: { hu: 'Elhelyezkedés', ua: 'Розташування' },
+    locationCopy: {
+      hu: 'Mala Bijhányban vagyunk, séta­távolságra a kosonyi termálfürdőktől, kényelmes autóútra a magyar határtól.',
+      ua: 'Ми в Малій Бийгані, у пішій відстані від косоньських термальних вод, зручно доїхати від угорського кордону.'
+    },
+    napName: { hu: 'Apartment Beatrice', ua: 'Apartment Beatrice' },
+    napAddress: { hu: 'vul. Miru, Mala Bijhány, Kárpátalja, Ukrajna', ua: 'вул. Миру, Мала Бийгань, Закарпатська обл., Україна' },
+    napPhone: { hu: '+380 95 210 7069', ua: '+380 95 210 7069' },
+    napEmail: { hu: 'apartmentbeatrice@gmail.com', ua: 'apartmentbeatrice@gmail.com' },
+    mapLabel: { hu: '[TÉRKÉP: Google Maps beágyazás hamarosan]', ua: '[КАРТА: вбудована Google-карта скоро]' },
+    bookingTitle: { hu: 'Foglaljatok egy sort — mi válaszolunk.', ua: 'Напишіть кілька слів — ми відповімо.' },
+    photoLabelInterior: { hu: '[FOTÓ: nappali, helyettesítő kép]', ua: '[ФОТО: вітальня, тимчасове фото]' },
+    photoLabelKitchen: { hu: '[FOTÓ: konyha, helyettesítő kép]', ua: '[ФОТО: кухня, тимчасове фото]' },
+    photoLabelExterior: { hu: '[FOTÓ: épület kívülről, helyettesítő]', ua: '[ФОТО: будівля зовні, тимчасове]' },
+    photoLabelBedroom: { hu: '[FOTÓ: hálószoba, helyettesítő]', ua: '[ФОТО: спальня, тимчасове]' },
+    photoLabelBathroom: { hu: '[FOTÓ: fürdőszoba, helyettesítő]', ua: '[ФОТО: ванна кімната, тимчасове]' },
+    photoLabelDetail: { hu: '[FOTÓ: enteriőr részlet, helyettesítő]', ua: '[ФОТО: деталь інтер’єру, тимчасове]' },
+    photoLabelSprings: { hu: '[FOTÓ: kosonyi termálfürdő, helyettesítő]', ua: '[ФОТО: косоньські термальні води, тимчасове]' }
+  };
+
+  setHu = () => this.setState({ lang: 'hu' });
+  setUa = () => this.setState({ lang: 'ua' });
+
+  renderVals() {
+    const lang = this.state.lang;
+    const t = (key) => Component.COPY[key][lang];
+
+    const ink = '#6E2E23';
+    const ground = '#F7F3EA';
+    const accent = 'oklch(68% 0.09 75)';
+
+    const pillBase = {
+      fontFamily: "'PT Sans', sans-serif",
+      fontSize: '13px',
+      letterSpacing: '0.06em',
+      padding: '6px 14px',
+      borderRadius: '999px',
+      border: `1px solid ${ink}`,
+      background: 'transparent',
+      color: ink,
+      cursor: 'pointer',
+    };
+    const huPillStyle = lang === 'hu' ? { ...pillBase, background: ink, color: ground } : pillBase;
+    const uaPillStyle = lang === 'ua' ? { ...pillBase, background: ink, color: ground } : pillBase;
+
+    const ctaPrimaryStyle = {
+      fontFamily: "'PT Sans', sans-serif",
+      fontWeight: 700,
+      fontSize: '15px',
+      padding: '14px 28px',
+      borderRadius: '4px',
+      background: accent,
+      color: '#3A1B12',
+      textDecoration: 'none',
+      display: 'inline-block',
+    };
+    const ctaPrimaryHoverStyle = { filter: 'brightness(1.06)' };
+    const ctaSecondaryStyle = {
+      fontFamily: "'PT Sans', sans-serif",
+      fontWeight: 700,
+      fontSize: '15px',
+      padding: '13px 26px',
+      borderRadius: '4px',
+      border: `1px solid ${ink}`,
+      color: ink,
+      textDecoration: 'none',
+      display: 'inline-block',
+    };
+    const ctaSecondaryOnDarkStyle = {
+      fontFamily: "'PT Sans', sans-serif",
+      fontWeight: 700,
+      fontSize: '15px',
+      padding: '13px 26px',
+      borderRadius: '4px',
+      border: `1px solid ${ground}`,
+      color: ground,
+      textDecoration: 'none',
+      display: 'inline-block',
+    };
+    const footerLinkStyle = { color: ink, textDecoration: 'underline', textUnderlineOffset: '3px' };
+
+    const placeholderStyle = {
+      background: `repeating-linear-gradient(45deg, color-mix(in oklch, ${ink} 16%, ${ground}), color-mix(in oklch, ${ink} 16%, ${ground}) 10px, transparent 10px, transparent 20px)`,
+      border: `1px solid color-mix(in oklch, ${ink} 22%, ${ground})`,
+      borderRadius: '2px',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      textAlign: 'center',
+      padding: '16px',
+    };
+    const placeholderLabelStyle = {
+      fontFamily: "'PT Sans', monospace",
+      fontSize: '12px',
+      color: 'color-mix(in oklch, ' + ink + ' 70%, ' + ground + ')',
+      background: ground,
+      padding: '4px 8px',
+    };
+
+    const waMsg = encodeURIComponent(t('waMessage'));
+
+    return {
+      lang,
+      setHu: this.setHu,
+      setUa: this.setUa,
+      huPillStyle,
+      uaPillStyle,
+      heroEyebrow: t('heroEyebrow'),
+      heroTagline: t('heroTagline'),
+      heroSubcopy: t('heroSubcopy'),
+      ctaWhatsapp: t('ctaWhatsapp'),
+      ctaCall: t('ctaCall'),
+      ctaMaps: t('ctaMaps'),
+      priceLine: t('priceLine'),
+      waLink: `https://wa.me/380952107069?text=${waMsg}`,
+      telLink: 'tel:+380952107069',
+      mapsLink: 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent('Apartment Beatrice, vul. Miru, Mala Byihan, Zakarpattia Oblast, Ukraine'),
+      ctaPrimaryStyle,
+      ctaPrimaryHoverStyle,
+      ctaSecondaryStyle,
+      ctaSecondaryOnDarkStyle,
+      footerLinkStyle,
+      hostWelcome: t('hostWelcome'),
+      hostSignoff: t('hostSignoff'),
+      roomsTitle: t('roomsTitle'),
+      room1Title: t('room1Title'),
+      room1Copy: t('room1Copy'),
+      room2Title: t('room2Title'),
+      room2Copy: t('room2Copy'),
+      galleryTitle: t('galleryTitle'),
+      galleryNote: t('galleryNote'),
+      locationTitle: t('locationTitle'),
+      locationCopy: t('locationCopy'),
+      napName: t('napName'),
+      napAddress: t('napAddress'),
+      napPhone: t('napPhone'),
+      napEmail: t('napEmail'),
+      mapLabel: t('mapLabel'),
+      bookingTitle: t('bookingTitle'),
+      photoLabelInterior: t('photoLabelInterior'),
+      photoLabelKitchen: t('photoLabelKitchen'),
+      photoLabelExterior: t('photoLabelExterior'),
+      photoLabelBedroom: t('photoLabelBedroom'),
+      photoLabelBathroom: t('photoLabelBathroom'),
+      photoLabelDetail: t('photoLabelDetail'),
+      photoLabelSprings: t('photoLabelSprings'),
+      placeholderStyle,
+      placeholderLabelStyle,
+    };
+  }
+}
+</script>
+</body>
+</html>
