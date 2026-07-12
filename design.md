@@ -117,6 +117,14 @@ Accent is CTA-only: the "Foglalj szobát" booking button, phone link, map link. 
 - Accent stays CTA-only here as well: brass fills the "Foglalás elküldése" submit / "Tovább" advance button and marks the active step; it is never decoration.
 - Bilingual mechanism identical to the main site: HU default, JS toggle, localStorage-persisted, no auto-detect.
 
+## DEPLOY STRUCTURE (required — per MONARCH_DOCTRINE 5-G0)
+
+The Cloudflare Pages build-output root is **`public/`** (`pages_build_output_dir = "public"` in `wrangler.toml`). ONLY publicly-servable files live inside `public/`: `index.html`, `base.css`, `app.js`, `consent.js`, `foglalas/`, `admin/`, `assets/` (processed `*.webp` + `logo.jpg` only).
+
+- `functions/` stays at the **repo root as a sibling of `public/`** — Cloudflare Pages discovers Functions at the project root, NOT inside the build-output dir. Moving it into `public/` breaks every `/api/*` route.
+- Internal files NEVER go inside `public/`: `CLAUDE.md`, `design.md`, `MONARCH_DOCTRINE.md`, `schema.sql`, `wrangler.toml`, `reference/`, `test/`, and `raw-photos/` (unprocessed source PNGs) all stay at repo root so they are never publicly served.
+- Deploy with `npx wrangler pages deploy` (no positional dir arg) from the repo root so it reads `pages_build_output_dir=public` and discovers `./functions`. Do NOT flatten this back to `pages_build_output_dir = "."` — that publicly serves every internal doc and config file.
+
 ## Banned
 
 - No generic hospitality stock photography.
