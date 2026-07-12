@@ -2,7 +2,7 @@
 // GA4 loads ONLY after explicit accept. Choice persisted in localStorage.
 (function () {
   // Mandy: replace with the real GA4 id (format G-XXXXXXXXXX) to enable analytics.
-  var GA4_MEASUREMENT_ID = "[GA4_MEASUREMENT_ID: TBD — Mandy to supply]";
+  var GA4_MEASUREMENT_ID = "G-SHZP2K4CVV";
   var STORE_KEY = "cookieConsent"; // "accepted" | "declined"
 
   var STRINGS = {
