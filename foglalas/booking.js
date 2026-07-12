@@ -2,7 +2,7 @@
 // 3 steps: dates -> room (only those free for the dates) -> contact -> submit.
 (function () {
   // caption key (photo_ref) -> asset base name in /assets
-  var PHOTO = { cap2: "n2", cap8: "n8", cap9: "n9", caph1: "h1", caph4: "h4" };
+  var PHOTO = { cap2: "n2", cap8: "n8", cap9: "n9", caph1: "h1", caph4: "h4", cap10: "n10", cap11: "n11" };
 
   // Static room content — mirrors schema.sql seed. Hardcoded (not /api/rooms) so the
   // showcase renders even when D1 is unbound; names/descriptions/photo_ref are fixed
@@ -13,8 +13,8 @@
     { name_hu: "Hálószoba",            name_ua: "Спальня",                  photo_ref: "caph1" },
     { name_hu: "Hálószoba",            name_ua: "Спальня",                  photo_ref: "caph4" },
     { name_hu: "Hangulatos hálószoba", name_ua: "Затишна спальня",          photo_ref: "cap2" },
-    { name_hu: "Szoba 6",              name_ua: "Кімната 6",                photo_ref: null },
-    { name_hu: "Szoba 7",              name_ua: "Кімната 7",                photo_ref: null }
+    { name_hu: "Szoba 6",              name_ua: "Кімната 6",                photo_ref: "cap10" },
+    { name_hu: "Szoba 7",              name_ua: "Кімната 7",                photo_ref: "cap11" }
   ].map(function (r) {
     r.description_hu = "[LEÍRÁS: rövid szoba-jellemzés hamarosan]";
     r.description_ua = "[ОПИС: короткий опис кімнати скоро]";
@@ -73,8 +73,12 @@
   var state = { rooms: [], checkIn: "", checkOut: "", roomId: null };
 
   function lang() {
-    try { if (localStorage.getItem("lang") === "ua") return "ua"; } catch (e) {}
-    return "hu";
+    try {
+      var saved = localStorage.getItem("lang");
+      if (saved === "hu") return "hu";
+      if (saved === "ua") return "ua";
+    } catch (e) {}
+    return "ua";
   }
   function t(key) { var e = STR[key]; return e ? e[lang()] : ""; }
 

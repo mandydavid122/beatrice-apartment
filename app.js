@@ -86,9 +86,9 @@ function apply(lang) {
   try { localStorage.setItem("lang", lang); } catch (e) {}
 }
 
-// HU default on load; only switch if the user previously chose UA (no auto-detect).
-var saved = "hu";
-try { if (localStorage.getItem("lang") === "ua") saved = "ua"; } catch (e) {}
+// UA default on load; only switch if the user previously chose HU (no auto-detect).
+var saved = "ua";
+try { if (localStorage.getItem("lang") === "hu") saved = "hu"; } catch (e) {}
 apply(saved);
 
 document.querySelectorAll(".lang__btn").forEach(function (b) {
