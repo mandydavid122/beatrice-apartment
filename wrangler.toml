@@ -1,0 +1,8 @@
+name = "beatrice-apartment"
+compatibility_date = "2024-09-23"
+pages_build_output_dir = "."
+
+[[d1_databases]]
+binding = "DB"
+database_name = "beatrice-bookings"
+database_id = "abeb3023-7cdd-408c-9dad-e24f8b198339"
