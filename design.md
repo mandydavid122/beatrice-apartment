@@ -107,26 +107,13 @@ Accent is CTA-only: the "Foglalj szobát" booking button, phone link, map link. 
 - Swash motif extracted from the client's existing calligraphic logo mark, used sparingly as a section divider glyph (not a repeating pattern/wallpaper).
 - Short handwritten-style host welcome note: a distinct script/signature face (not Playfair, not PT Sans — a third, tightly-scoped face used only here), framed as a personal note with the host's name signed. This is the one place personality overrides the typographic system's restraint — deliberately, once.
 
-## Secondary Design System — Booking Subsystem (/foglalas + /admin)
+## Booking subsystem (/foglalas + /admin) — SAME token set, no fork
 
-**Named, approved exception — NOT token drift.** `/foglalas/` and `/admin/` intentionally use a DIFFERENT token set from the main editorial site. This is a deliberate fork approved by Mandy, not accidental drift. It exists so a future Section 8 QA pass (rubric #10, token consistency) does not flag these two surfaces as regressions: they are a separate, scoped subsystem with its own tokens. The main site (index.html) is unaffected and keeps the tokens above byte-for-byte.
+`/foglalas/` and `/admin/` use the **SAME** token set as the main site — no fork. This **reverses an earlier approved-but-regretted decision** (a teal/cream + Quicksand/Nunito "Secondary Design System") — see project handoff notes.
 
-Rationale: the booking flow is a transactional, form-driven utility surface. A friendlier, rounder, brighter "app" vocabulary (teal + cream, Quicksand/Nunito, pill buttons) signals "safe to fill in a form" better than the restrained oxblood editorial system, which is tuned for browsing and brand feel.
-
-Scope: applies ONLY to `/foglalas/` and `/admin/`. It must never leak into index.html / base.css.
-
-Tokens (booking subsystem):
-```css
---b-ground:  #FFFDF9;  /* cream ground */
---b-surface: #F5EFE3;  /* coral/cream secondary surface (cards) */
---b-primary: #1D9E75;  /* teal — primary accent: buttons, progress, active step */
---b-primary-ink: #16805E; /* teal pressed/hover */
---b-ink:     #1B3A34;  /* deep teal-ink text */
---b-radius-card: 20px; /* cards 16–20px */
---b-radius-pill: 99px; /* pills / buttons */
-```
-- Headline: **Quicksand 700**. Body: **Nunito 400/700**. (Glyph note: Quicksand's Cyrillic coverage is incomplete, so headline `font-family` falls back to Nunito — which is glyph-complete for HU latin-ext + UA cyrillic — ahead of any system font. No bare system fallback, glyph gate holds on both languages.)
-- Radius 16–20px on cards, 99px on pills/buttons. This is the one place rounded geometry is allowed; the main site stays at 2–4px.
+- `/foglalas/` links `base.css` for the `:root` tokens and shared chrome (`.header`, `.lang`, `.btn`, `.footer`), exactly as index.html does. `booking.css` no longer declares its own `:root`; it only styles the booking-flow-specific classes (`.bk-steps`, `.bk-panel`, `.bk-field`, `.bk-rooms`, `.bk-room`, `.bk-btn`, `.bk-success`) **on the main tokens above** — hairline `--c-ink` borders, brass `--c-accent` on active step / primary button only, Playfair Display headings, 2–4px radius.
+- `/admin/` is an internal-only tool: functional styling is allowed to stay minimal per doctrine, but it too draws from `base.css` tokens — no teal, no Quicksand/Nunito.
+- Accent stays CTA-only here as well: brass fills the "Foglalás elküldése" submit / "Tovább" advance button and marks the active step; it is never decoration.
 - Bilingual mechanism identical to the main site: HU default, JS toggle, localStorage-persisted, no auto-detect.
 
 ## Banned

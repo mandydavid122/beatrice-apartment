@@ -1,15 +1,15 @@
 /* Apartment Beatrice — admin. Internal tool: functional & accessible, not brand-polished.
-   Uses the booking subsystem palette loosely; no strict token match required (design.md). */
+   Draws from the main-site palette (no teal fork); system font kept for a plain data tool. */
 :root {
-  --a-ground: #FFFDF9;
-  --a-surface: #F5EFE3;
-  --a-ink: #1B3A34;
-  --a-soft: #55716A;
-  --a-primary: #1D9E75;
-  --a-primary-ink: #16805E;
-  --a-line: #E2D9C8;
-  --a-error: #B23A2E;
-  --a-warn: #B4791E;
+  --a-ground: #F7F3EA;      /* main ground */
+  --a-surface: #EFE7D8;     /* main ground-alt */
+  --a-ink: #6E2A20;         /* main ink (wine-oxblood) */
+  --a-soft: #8A4438;        /* main ink-soft */
+  --a-primary: #B98A3E;     /* main brass accent */
+  --a-primary-ink: #A47730; /* main accent-hover */
+  --a-line: #E2D9C8;        /* warm hairline */
+  --a-error: #B23A2E;       /* semantic error */
+  --a-warn: #B4791E;        /* semantic warn */
 }
 * { box-sizing: border-box; }
 body {

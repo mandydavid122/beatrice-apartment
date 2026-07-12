@@ -1,133 +1,136 @@
-/* Apartment Beatrice — booking subsystem. SECONDARY design system (design.md fork).
-   Teal/cream, Quicksand/Nunito, rounded. Scoped to /foglalas + /admin only. */
-:root {
-  --b-ground:  #FFFDF9;
-  --b-surface: #F5EFE3;
-  --b-primary: #1D9E75;
-  --b-primary-ink: #16805E;
-  --b-ink:     #1B3A34;
-  --b-ink-soft: #55716A;
-  --b-line: #E2D9C8;
-  --b-error: #B23A2E;
-  --b-radius-card: 20px;
-  --b-radius-pill: 99px;
-}
+/* Apartment Beatrice — booking subsystem. SAME token set as the main site (no fork).
+   Tokens + shared chrome (.header/.lang/.btn/.footer) come from base.css, loaded first.
+   This file styles ONLY the booking-flow-specific classes, on the main tokens. */
 
-* { box-sizing: border-box; }
-body {
-  margin: 0;
-  background: var(--b-ground);
-  color: var(--b-ink);
-  font-family: "Nunito", sans-serif;
-  font-size: 1.0625rem;
-  line-height: 1.6;
+/* in-page subnav (anchors + real conversion links) */
+.bk-subnav {
+  display: flex; flex-wrap: wrap; align-items: center;
+  gap: var(--sp-2);
+  max-width: 640px; margin: 0 auto;
+  padding: var(--sp-1) var(--sp-3) var(--sp-2);
+  font-family: "PT Sans", sans-serif; font-size: 0.9375rem;
+  border-bottom: 1px solid color-mix(in srgb, var(--c-ink) 12%, transparent);
 }
-/* Quicksand has no Cyrillic — fall to Nunito (glyph-complete HU+UA) before any system font */
-h1, h2, .bk-step__num { font-family: "Quicksand", "Nunito", sans-serif; font-weight: 700; }
-img { max-width: 100%; display: block; }
+.bk-subnav a { color: var(--c-ink-soft); text-decoration: none; }
+.bk-subnav a:hover { color: var(--c-ink); text-decoration: underline; text-underline-offset: 3px; }
+.bk-subnav__sep { margin-left: auto; }
 
-/* header */
-.bk-header {
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 16px 20px; max-width: 720px; margin: 0 auto;
-}
-.bk-back { color: var(--b-ink-soft); text-decoration: none; font-weight: 700; }
-.bk-back:hover { color: var(--b-primary); }
-.bk-lang { display: flex; align-items: center; gap: 8px; color: var(--b-line); }
-.bk-lang__btn {
-  border: none; background: none; cursor: pointer; padding: 6px 8px;
-  font-family: "Nunito", sans-serif; font-size: 0.875rem; color: var(--b-ink-soft); opacity: 0.7;
-}
-.bk-lang__btn[aria-pressed="true"] { color: var(--b-primary); font-weight: 700; opacity: 1; }
+/* main column */
+.bk-main { max-width: 640px; margin: 0 auto; padding: var(--sp-4) var(--sp-3) var(--sp-8); }
+.bk-title { margin: 0 0 var(--sp-2); }
+.bk-section__title { margin: 0 0 var(--sp-3); }
 
-/* main */
-.bk-main { max-width: 640px; margin: 0 auto; padding: 8px 20px 64px; }
-.bk-title { font-size: clamp(1.75rem, 1.4rem + 1.6vw, 2.25rem); margin: 8px 0 24px; }
-
-/* step indicator */
-.bk-steps {
-  list-style: none; display: flex; gap: 8px; padding: 0; margin: 0 0 32px;
+/* intro (reused approved copy) */
+.bk-intro { margin-bottom: var(--sp-8); }
+.bk-intro__host {
+  font-family: "Cormorant Garamond", "Playfair Display", serif;
+  font-style: italic; font-weight: 500;
+  font-size: clamp(1.375rem, 1.2rem + 0.8vw, 1.625rem);
+  line-height: 1.4; color: var(--c-ink);
 }
-.bk-step { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 6px; color: var(--b-ink-soft); }
+.bk-intro__springs { color: var(--c-ink-soft); }
+
+/* section spacing */
+.bk-showcase, .bk-flow, .bk-map-sec { margin-bottom: var(--sp-8); }
+/* anchor targets clear the sticky .header (B6) */
+#szobak, #foglalas, #kapcsolat, #terkep { scroll-margin-top: 80px; }
+
+/* step indicator (kept UX; re-skinned to brass accent) */
+.bk-steps { list-style: none; display: flex; gap: var(--sp-1); padding: 0; margin: 0 0 var(--sp-4); }
+.bk-step { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 6px; color: var(--c-ink-soft); }
 .bk-step__num {
-  width: 40px; height: 40px; border-radius: var(--b-radius-pill);
+  width: 40px; height: 40px; border-radius: 50%;
   display: flex; align-items: center; justify-content: center;
-  background: var(--b-surface); color: var(--b-ink-soft); font-size: 1.125rem;
-  border: 2px solid transparent;
+  font-family: "PT Sans", sans-serif; font-size: 1.0625rem; font-weight: 700;
+  background: var(--c-ground-alt); color: var(--c-ink-soft);
+  border: 1px solid color-mix(in srgb, var(--c-ink) 20%, transparent);
 }
 .bk-step__label { font-size: 0.8125rem; }
-.bk-step.is-active .bk-step__num { background: var(--b-primary); color: #fff; }
-.bk-step.is-done .bk-step__num { background: var(--b-primary-ink); color: #fff; }
-.bk-step.is-active .bk-step__label { color: var(--b-ink); font-weight: 700; }
+.bk-step.is-active .bk-step__num { background: var(--c-accent); color: var(--c-white); border-color: var(--c-accent); }
+.bk-step.is-done .bk-step__num { background: var(--c-accent-hover); color: var(--c-white); border-color: var(--c-accent-hover); }
+.bk-step.is-active .bk-step__label { color: var(--c-ink); font-weight: 700; }
 
 /* panels */
 .bk-panel { display: none; }
 .bk-panel.is-active { display: block; }
-.bk-panel__title { font-size: 1.375rem; margin: 0 0 20px; }
+.bk-panel__title { margin: 0 0 var(--sp-3); }
 
 /* fields */
-.bk-field { margin-bottom: 20px; }
+.bk-field { margin-bottom: var(--sp-3); }
 .bk-field label { display: block; font-weight: 700; margin-bottom: 6px; font-size: 0.9375rem; }
 .bk-field input, .bk-field textarea {
   width: 100%; padding: 12px 14px; font-family: inherit; font-size: 1rem;
-  color: var(--b-ink); background: #fff;
-  border: 1.5px solid var(--b-line); border-radius: 12px;
+  color: var(--c-ink); background: var(--c-white);
+  border: 1px solid color-mix(in srgb, var(--c-ink) 30%, var(--c-ground));
+  border-radius: var(--r-md);
 }
 .bk-field input:focus-visible, .bk-field textarea:focus-visible {
-  outline: none; border-color: var(--b-primary);
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--b-primary) 25%, transparent);
+  outline: none; border-color: var(--c-accent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--c-accent) 30%, transparent);
 }
 
-/* buttons (pills) */
+/* buttons — mirror main-site .btn (accent primary, ink ghost, 4px radius) */
 .bk-btn {
-  font-family: "Nunito", sans-serif; font-weight: 700; font-size: 1rem;
-  padding: 14px 28px; border: none; border-radius: var(--b-radius-pill);
-  background: var(--b-primary); color: #fff; cursor: pointer;
+  font-family: "PT Sans", sans-serif; font-weight: 700; font-size: 0.9375rem;
+  padding: 14px 26px; border: none; border-radius: var(--r-md);
+  background: var(--c-accent); color: var(--c-white); cursor: pointer;
   text-decoration: none; display: inline-block; text-align: center;
   transition: background-color 150ms ease, transform 100ms ease;
 }
-.bk-btn:hover { background: var(--b-primary-ink); }
-.bk-btn:active { transform: scale(0.98); }
+.bk-btn:hover { background: var(--c-accent-hover); }
+.bk-btn:active { transform: scale(0.97); }
 .bk-btn:disabled { opacity: 0.55; cursor: default; }
-.bk-btn:focus-visible { outline: 3px solid var(--b-primary-ink); outline-offset: 2px; }
-.bk-btn--ghost { background: transparent; color: var(--b-primary); border: 1.5px solid var(--b-primary); }
-.bk-btn--ghost:hover { background: color-mix(in srgb, var(--b-primary) 10%, transparent); color: var(--b-primary-ink); }
-.bk-nav { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 8px; }
+.bk-btn:focus-visible { outline: 2px solid var(--c-accent-hover); outline-offset: 2px; }
+.bk-btn--ghost { background: transparent; color: var(--c-ink); border: 1px solid var(--c-ink); }
+.bk-btn--ghost:hover { background: color-mix(in srgb, var(--c-ink) 8%, transparent); }
+.bk-nav { display: flex; gap: var(--sp-2); flex-wrap: wrap; margin-top: var(--sp-1); }
 
 /* notes + errors */
-.bk-note { color: var(--b-ink-soft); font-size: 0.9375rem; margin: 0 0 16px; }
-.bk-error { color: var(--b-error); font-weight: 700; font-size: 0.9375rem; margin: 0 0 16px; }
+.bk-note { color: var(--c-ink-soft); font-size: 0.9375rem; margin: 0 0 var(--sp-2); }
+.bk-error { color: var(--c-ink); font-weight: 700; font-size: 0.9375rem; margin: 0 0 var(--sp-2); }
 .bk-error[hidden] { display: none; }
 
 /* honeypot — visually + AT hidden, but focusable off-screen for bots */
 .bk-hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
 
-/* room cards */
-.bk-rooms { display: grid; gap: 16px; margin-bottom: 24px; }
+/* room cards — hairline editorial cards (no filled surfaces) */
+.bk-rooms { display: grid; gap: var(--sp-2); margin-bottom: var(--sp-3); }
 @media (min-width: 560px) { .bk-rooms { grid-template-columns: 1fr 1fr; } }
 .bk-room {
-  border: 2px solid var(--b-line); border-radius: var(--b-radius-card);
-  background: var(--b-surface); overflow: hidden; cursor: pointer;
+  border: 1px solid color-mix(in srgb, var(--c-ink) 20%, var(--c-ground));
+  border-radius: var(--r-sm);
+  background: var(--c-white); overflow: hidden; cursor: pointer;
   padding: 0; text-align: left; font-family: inherit; color: inherit;
-  display: flex; flex-direction: column; transition: border-color 150ms ease, transform 100ms ease;
+  display: flex; flex-direction: column; transition: border-color 150ms ease;
 }
-.bk-room:hover { border-color: var(--b-primary); }
-.bk-room:focus-visible { outline: 3px solid var(--b-primary); outline-offset: 2px; }
-.bk-room[aria-pressed="true"] { border-color: var(--b-primary); box-shadow: 0 0 0 2px var(--b-primary) inset; }
-.bk-room__photo { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; background: var(--b-surface); }
+.bk-room:hover { border-color: var(--c-accent); }
+.bk-room:focus-visible { outline: 2px solid var(--c-accent); outline-offset: 2px; }
+.bk-room[aria-pressed="true"] { border-color: var(--c-accent); box-shadow: 0 0 0 1px var(--c-accent) inset; }
+.bk-room__photo { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; background: var(--c-ground-alt); }
 .bk-room__ph {
   width: 100%; aspect-ratio: 4 / 3; display: flex; align-items: center; justify-content: center;
-  text-align: center; padding: 12px; font-size: 0.8125rem; color: var(--b-ink-soft);
-  background: repeating-linear-gradient(45deg, #EDE4D3, #EDE4D3 10px, transparent 10px, transparent 20px);
+  text-align: center; padding: 12px; font-size: 0.8125rem; color: var(--c-ink-soft);
+  background: repeating-linear-gradient(45deg,
+    color-mix(in srgb, var(--c-ink) 14%, var(--c-ground)),
+    color-mix(in srgb, var(--c-ink) 14%, var(--c-ground)) 10px,
+    transparent 10px, transparent 20px);
 }
-.bk-room__body { padding: 14px 16px; }
-.bk-room__name { font-family: "Quicksand", "Nunito", sans-serif; font-weight: 700; font-size: 1.0625rem; margin: 0 0 4px; }
-.bk-room__desc { font-size: 0.875rem; color: var(--b-ink-soft); margin: 0; }
+.bk-room__body { padding: var(--sp-2); }
+.bk-room__name { font-family: "Playfair Display", serif; font-weight: 600; font-size: 1.125rem; line-height: 1.2; margin: 0 0 4px; }
+.bk-room__desc { font-size: 0.9375rem; color: var(--c-ink-soft); margin: 0; }
+
+/* the showcase grid is not clickable — plain cards */
+.bk-showcase .bk-room { cursor: default; }
+.bk-showcase .bk-room:hover { border-color: color-mix(in srgb, var(--c-ink) 20%, var(--c-ground)); }
+
+/* map */
+.bk-map { border: 1px solid color-mix(in srgb, var(--c-ink) 18%, transparent); border-radius: var(--r-sm); overflow: hidden; }
+.bk-map iframe { display: block; width: 100%; }
 
 /* success */
-.bk-success { text-align: center; padding-top: 24px; }
+.bk-success { text-align: center; padding-top: var(--sp-3); }
 .bk-success__mark {
-  width: 64px; height: 64px; margin: 0 auto 16px; border-radius: var(--b-radius-pill);
-  background: var(--b-primary); color: #fff; font-size: 2rem;
+  width: 64px; height: 64px; margin: 0 auto var(--sp-2); border-radius: 50%;
+  background: var(--c-accent); color: var(--c-white); font-size: 2rem;
   display: flex; align-items: center; justify-content: center;
 }

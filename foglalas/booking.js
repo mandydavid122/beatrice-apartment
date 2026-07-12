@@ -4,9 +4,38 @@
   // caption key (photo_ref) -> asset base name in /assets
   var PHOTO = { cap2: "n2", cap8: "n8", cap9: "n9", caph1: "h1", caph4: "h4" };
 
+  // Static room content — mirrors schema.sql seed. Hardcoded (not /api/rooms) so the
+  // showcase renders even when D1 is unbound; names/descriptions/photo_ref are fixed
+  // seed data, not live availability. Descriptions are the literal S7 placeholders.
+  var ROOMS = [
+    { name_hu: "Szoba saját fürdővel", name_ua: "Кімната з власною ванною", photo_ref: "cap8" },
+    { name_hu: "Családi szoba",        name_ua: "Сімейна кімната",          photo_ref: "cap9" },
+    { name_hu: "Hálószoba",            name_ua: "Спальня",                  photo_ref: "caph1" },
+    { name_hu: "Hálószoba",            name_ua: "Спальня",                  photo_ref: "caph4" },
+    { name_hu: "Hangulatos hálószoba", name_ua: "Затишна спальня",          photo_ref: "cap2" },
+    { name_hu: "Szoba 6",              name_ua: "Кімната 6",                photo_ref: null },
+    { name_hu: "Szoba 7",              name_ua: "Кімната 7",                photo_ref: null }
+  ].map(function (r) {
+    r.description_hu = "[LEÍRÁS: rövid szoba-jellemzés hamarosan]";
+    r.description_ua = "[ОПИС: короткий опис кімнати скоро]";
+    return r;
+  });
+
   var STR = {
     backHome:   { hu: "← Vissza", ua: "← Назад" },
     pageTitle:  { hu: "Foglalj szobát", ua: "Забронювати кімнату" },
+    navRooms:   { hu: "Szobák", ua: "Кімнати" },
+    navBook:    { hu: "Foglalás", ua: "Бронювання" },
+    navContact: { hu: "Kapcsolat", ua: "Контакти" },
+    introHost:  { hu: "Nem egy szállodalánc vagyunk — egy családi panzió, ahol minden szobát mi magunk tartunk rendben, és személyesen fogadunk mindenkit, aki megérkezik.",
+                  ua: "Ми не готельна мережа — родинний пансіонат, де кожну кімнату доглядаємо самі, і особисто зустрічаємо кожного гостя." },
+    introSprings: { hu: "Kis Bégányban vagyunk, sétatávolságra a kosonyi termálfürdőktől, kényelmes autóútra a magyar határtól.",
+                    ua: "Ми в Малій Бийгані, у пішій відстані від косоньських термальних вод, зручно доїхати від угорського кордону." },
+    showcaseTitle: { hu: "Szobáink", ua: "Наші кімнати" },
+    showcaseNote:  { hu: "Hét szoba közül választhatsz. A leírások hamarosan bővülnek.", ua: "Можна обрати з семи кімнат. Описи скоро доповнимо." },
+    flowTitle:  { hu: "Foglalás három lépésben", ua: "Бронювання у три кроки" },
+    mapTitle:   { hu: "Hol vagyunk", ua: "Де ми" },
+    napAddress: { hu: "Béke utca, Kis Bégány, Kárpátalja, Ukrajna", ua: "вул. Миру, Мала Бийгань, Закарпатська обл., Україна" },
     step1Label: { hu: "Dátum", ua: "Дати" },
     step2Label: { hu: "Szoba", ua: "Кімната" },
     step3Label: { hu: "Adatok", ua: "Дані" },
@@ -55,10 +84,11 @@
       var e = STR[el.getAttribute("data-i18n")];
       if (e) el.textContent = e[l];
     });
-    document.querySelectorAll(".bk-lang__btn").forEach(function (b) {
+    document.querySelectorAll(".lang__btn").forEach(function (b) {
       b.setAttribute("aria-pressed", String(b.getAttribute("data-lang") === l));
     });
     // re-render dynamic bits in the new language
+    renderShowcase();
     updateSummaries();
     if (document.querySelector('.bk-panel[data-step="2"]').classList.contains("is-active")) renderRooms();
     var done = document.querySelector('[data-role="doneText"]');
@@ -156,6 +186,21 @@
     });
   }
 
+  // Static showcase of all 7 rooms (content, not availability). Non-interactive cards.
+  function renderShowcase() {
+    var wrap = document.querySelector('[data-role="showcase"]');
+    if (!wrap) return;
+    var l = lang();
+    wrap.innerHTML = ROOMS.map(function (room) {
+      return '<div class="bk-room">' +
+             roomPhotoHTML(room) +
+             '<span class="bk-room__body">' +
+             '<span class="bk-room__name">' + escapeHtml(room["name_" + l]) + '</span>' +
+             '<span class="bk-room__desc">' + escapeHtml(room["description_" + l]) + '</span>' +
+             '</span></div>';
+    }).join("");
+  }
+
   function escapeHtml(s) {
     return String(s).replace(/[&<>"']/g, function (c) {
       return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
@@ -247,7 +292,7 @@
     show("done");
   }
 
-  document.querySelectorAll(".bk-lang__btn").forEach(function (b) {
+  document.querySelectorAll(".lang__btn").forEach(function (b) {
     b.addEventListener("click", function () { setLang(b.getAttribute("data-lang")); });
   });
 

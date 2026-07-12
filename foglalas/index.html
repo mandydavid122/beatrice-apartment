@@ -9,95 +9,156 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,500;1,600&family=Playfair+Display:ital,wght@0,600;0,700;1,500&family=PT+Sans:wght@400;700&display=swap" rel="stylesheet">
 
+  <!-- base.css first: :root tokens + shared chrome (.header/.lang/.btn/.footer). booking.css layers the flow on top. -->
+  <link rel="stylesheet" href="/base.css">
   <link rel="stylesheet" href="booking.css">
 </head>
 <body>
 
-  <header class="bk-header">
-    <a class="bk-back" href="/" data-i18n="backHome">← Vissza</a>
-    <nav class="bk-lang" aria-label="Nyelv / Мова">
-      <button class="bk-lang__btn" data-lang="hu" aria-pressed="true">HU</button>
-      <span aria-hidden="true">/</span>
-      <button class="bk-lang__btn" data-lang="ua" aria-pressed="false">UA</button>
+  <!-- ===== HEADER (same chrome as the main site: logo + language toggle) ===== -->
+  <header class="header" id="top">
+    <a href="/" aria-label="Apartment Beatrice — főoldal / головна">
+      <img class="header__logo" src="/assets/logo.jpg" alt="Apartment Beatrice">
+    </a>
+    <nav class="lang" aria-label="Nyelv / Мова">
+      <button class="lang__btn" data-lang="hu" aria-pressed="true">HU</button>
+      <span class="lang__sep" aria-hidden="true">/</span>
+      <button class="lang__btn" data-lang="ua" aria-pressed="false">UA</button>
     </nav>
   </header>
 
+  <!-- in-page nav + real conversion links -->
+  <nav class="bk-subnav" aria-label="Oldal navigáció / Навігація">
+    <a href="#szobak" data-i18n="navRooms">Szobák</a>
+    <a href="#foglalas" data-i18n="navBook">Foglalás</a>
+    <a href="#kapcsolat" data-i18n="navContact">Kapcsolat</a>
+    <a class="bk-subnav__sep" href="tel:+380952107069">+380 95 210 7069</a>
+    <a href="https://facebook.com/people/Apartment-Beatrice/61577018919822" target="_blank" rel="noopener">Facebook</a>
+    <a href="https://instagram.com/apartmentbeatrice" target="_blank" rel="noopener">Instagram</a>
+  </nav>
+
   <main class="bk-main">
-    <h1 class="bk-title" data-i18n="pageTitle">Foglalj szobát</h1>
 
-    <!-- progress indicator -->
-    <ol class="bk-steps" aria-label="Foglalási lépések">
-      <li class="bk-step is-active" data-step-ind="1"><span class="bk-step__num">1</span><span class="bk-step__label" data-i18n="step1Label">Dátum</span></li>
-      <li class="bk-step" data-step-ind="2"><span class="bk-step__num">2</span><span class="bk-step__label" data-i18n="step2Label">Szoba</span></li>
-      <li class="bk-step" data-step-ind="3"><span class="bk-step__num">3</span><span class="bk-step__label" data-i18n="step3Label">Adatok</span></li>
-    </ol>
-
-    <!-- STEP 1 — dates -->
-    <section class="bk-panel is-active" data-step="1" aria-labelledby="s1h">
-      <h2 id="s1h" class="bk-panel__title" data-i18n="s1Title">Mikor jönnél?</h2>
-      <div class="bk-field">
-        <label for="checkIn" data-i18n="labelCheckIn">Érkezés</label>
-        <input type="date" id="checkIn" required>
-      </div>
-      <div class="bk-field">
-        <label for="checkOut" data-i18n="labelCheckOut">Távozás</label>
-        <input type="date" id="checkOut" required>
-      </div>
-      <p class="bk-error" data-role="err1" hidden></p>
-      <button type="button" class="bk-btn" data-action="to2" data-i18n="next">Tovább</button>
+    <!-- ===== INTRO (reused approved copy: host line + Kosonь springs proximity) ===== -->
+    <section class="bk-intro">
+      <h1 class="bk-title" data-i18n="pageTitle">Foglalj szobát</h1>
+      <p class="bk-intro__host" data-i18n="introHost"></p>
+      <p class="bk-intro__springs" data-i18n="introSprings"></p>
     </section>
 
-    <!-- STEP 2 — room selection -->
-    <section class="bk-panel" data-step="2" aria-labelledby="s2h">
-      <h2 id="s2h" class="bk-panel__title" data-i18n="s2Title">Válassz szobát</h2>
-      <p class="bk-note" data-role="dateSummary"></p>
-      <p class="bk-error" data-role="err2" hidden></p>
-      <div class="bk-rooms" data-role="rooms" aria-live="polite"></div>
-      <div class="bk-nav">
-        <button type="button" class="bk-btn bk-btn--ghost" data-action="back1" data-i18n="back">Vissza</button>
-      </div>
+    <!-- ===== ROOM SHOWCASE — all 7 rooms (content, not availability) ===== -->
+    <section class="bk-showcase" id="szobak" aria-labelledby="szobakh">
+      <h2 id="szobakh" class="bk-section__title" data-i18n="showcaseTitle">Szobáink</h2>
+      <p class="bk-note" data-i18n="showcaseNote"></p>
+      <div class="bk-rooms" data-role="showcase"></div>
     </section>
 
-    <!-- STEP 3 — contact form -->
-    <section class="bk-panel" data-step="3" aria-labelledby="s3h">
-      <h2 id="s3h" class="bk-panel__title" data-i18n="s3Title">Add meg az elérhetőséged</h2>
-      <p class="bk-note" data-role="bookingSummary"></p>
-      <form class="bk-form" data-role="form" novalidate>
+    <!-- ===== BOOKING FLOW (3 steps — logic + step-indicator UX kept, re-skinned) ===== -->
+    <section class="bk-flow" id="foglalas" aria-labelledby="flowh">
+      <h2 id="flowh" class="bk-section__title" data-i18n="flowTitle">Foglalás három lépésben</h2>
+
+      <!-- progress indicator -->
+      <ol class="bk-steps" aria-label="Foglalási lépések">
+        <li class="bk-step is-active" data-step-ind="1"><span class="bk-step__num">1</span><span class="bk-step__label" data-i18n="step1Label">Dátum</span></li>
+        <li class="bk-step" data-step-ind="2"><span class="bk-step__num">2</span><span class="bk-step__label" data-i18n="step2Label">Szoba</span></li>
+        <li class="bk-step" data-step-ind="3"><span class="bk-step__num">3</span><span class="bk-step__label" data-i18n="step3Label">Adatok</span></li>
+      </ol>
+
+      <!-- STEP 1 — dates -->
+      <div class="bk-panel is-active" data-step="1" aria-labelledby="s1h">
+        <h3 id="s1h" class="bk-panel__title" data-i18n="s1Title">Mikor jönnél?</h3>
         <div class="bk-field">
-          <label for="guestName" data-i18n="labelName">Név</label>
-          <input type="text" id="guestName" name="guestName" autocomplete="name" required>
+          <label for="checkIn" data-i18n="labelCheckIn">Érkezés</label>
+          <input type="date" id="checkIn" required>
         </div>
         <div class="bk-field">
-          <label for="guestContact" data-i18n="labelContact">Telefon vagy e-mail</label>
-          <input type="text" id="guestContact" name="guestContact" autocomplete="email" required>
+          <label for="checkOut" data-i18n="labelCheckOut">Távozás</label>
+          <input type="date" id="checkOut" required>
         </div>
-        <div class="bk-field">
-          <label for="guestNote" data-i18n="labelNote">Megjegyzés (nem kötelező)</label>
-          <textarea id="guestNote" name="guestNote" rows="3"></textarea>
-        </div>
-        <!-- honeypot: hidden from humans, bots fill it -->
-        <div class="bk-hp" aria-hidden="true">
-          <label for="company">Company</label>
-          <input type="text" id="company" name="company" tabindex="-1" autocomplete="off">
-        </div>
-        <p class="bk-error" data-role="err3" hidden></p>
+        <p class="bk-error" data-role="err1" hidden></p>
+        <button type="button" class="bk-btn" data-action="to2" data-i18n="next">Tovább</button>
+      </div>
+
+      <!-- STEP 2 — room selection -->
+      <div class="bk-panel" data-step="2" aria-labelledby="s2h">
+        <h3 id="s2h" class="bk-panel__title" data-i18n="s2Title">Válassz szobát</h3>
+        <p class="bk-note" data-role="dateSummary"></p>
+        <p class="bk-error" data-role="err2" hidden></p>
+        <div class="bk-rooms" data-role="rooms" aria-live="polite"></div>
         <div class="bk-nav">
-          <button type="button" class="bk-btn bk-btn--ghost" data-action="back2" data-i18n="back">Vissza</button>
-          <button type="submit" class="bk-btn" data-role="submit" data-i18n="submit">Foglalás elküldése</button>
+          <button type="button" class="bk-btn bk-btn--ghost" data-action="back1" data-i18n="back">Vissza</button>
         </div>
-      </form>
+      </div>
+
+      <!-- STEP 3 — contact form -->
+      <div class="bk-panel" data-step="3" aria-labelledby="s3h">
+        <h3 id="s3h" class="bk-panel__title" data-i18n="s3Title">Add meg az elérhetőséged</h3>
+        <p class="bk-note" data-role="bookingSummary"></p>
+        <form class="bk-form" data-role="form" novalidate>
+          <div class="bk-field">
+            <label for="guestName" data-i18n="labelName">Név</label>
+            <input type="text" id="guestName" name="guestName" autocomplete="name" required>
+          </div>
+          <div class="bk-field">
+            <label for="guestContact" data-i18n="labelContact">Telefon vagy e-mail</label>
+            <input type="text" id="guestContact" name="guestContact" autocomplete="email" required>
+          </div>
+          <div class="bk-field">
+            <label for="guestNote" data-i18n="labelNote">Megjegyzés (nem kötelező)</label>
+            <textarea id="guestNote" name="guestNote" rows="3"></textarea>
+          </div>
+          <!-- honeypot: hidden from humans, bots fill it -->
+          <div class="bk-hp" aria-hidden="true">
+            <label for="company">Company</label>
+            <input type="text" id="company" name="company" tabindex="-1" autocomplete="off">
+          </div>
+          <p class="bk-error" data-role="err3" hidden></p>
+          <div class="bk-nav">
+            <button type="button" class="bk-btn bk-btn--ghost" data-action="back2" data-i18n="back">Vissza</button>
+            <button type="submit" class="bk-btn" data-role="submit" data-i18n="submit">Foglalás elküldése</button>
+          </div>
+        </form>
+      </div>
+
+      <!-- SUCCESS -->
+      <div class="bk-panel bk-success" data-step="done" aria-labelledby="doneh" role="status">
+        <div class="bk-success__mark" aria-hidden="true">✓</div>
+        <h3 id="doneh" class="bk-panel__title" data-i18n="doneTitle">Köszönjük!</h3>
+        <p data-role="doneText"></p>
+        <a class="bk-btn bk-btn--ghost" href="/" data-i18n="backHome">← Vissza a főoldalra</a>
+      </div>
     </section>
 
-    <!-- SUCCESS -->
-    <section class="bk-panel bk-success" data-step="done" aria-labelledby="doneh" role="status">
-      <div class="bk-success__mark" aria-hidden="true">✓</div>
-      <h2 id="doneh" class="bk-panel__title" data-i18n="doneTitle">Köszönjük!</h2>
-      <p data-role="doneText"></p>
-      <a class="bk-btn bk-btn--ghost" href="/" data-i18n="backHome">← Vissza a főoldalra</a>
+    <!-- ===== LOCATION / MAP ===== -->
+    <section class="bk-map-sec" id="terkep" aria-labelledby="terkeph">
+      <h2 id="terkeph" class="bk-section__title" data-i18n="mapTitle">Hol vagyunk</h2>
+      <p class="bk-note" data-i18n="napAddress"></p>
+      <div class="bk-map">
+        <iframe
+          title="Apartment Beatrice — Google Maps"
+          src="https://www.google.com/maps?q=Apartment%20Beatrice%2C%20B%C3%A9ke%20utca%2C%20Kis%20B%C3%A9g%C3%A1ny%2C%20Zakarpattia%20Oblast%2C%20Ukraine&output=embed"
+          width="100%" height="320" style="border:0" loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+      </div>
     </section>
+
   </main>
+
+  <!-- ===== FOOTER / CONTACT ===== -->
+  <footer class="footer" id="kapcsolat">
+    <img class="footer__logo" src="/assets/logo.jpg" alt="Apartment Beatrice">
+    <div class="meta">
+      <div data-i18n="napAddress"></div>
+      <div><a href="tel:+380952107069">+380 95 210 7069</a> · apartmentbeatrice@gmail.com</div>
+      <div style="margin-top:8px">
+        <a href="https://facebook.com/people/Apartment-Beatrice/61577018919822" target="_blank" rel="noopener">Facebook</a>
+        <span aria-hidden="true"> · </span>
+        <a href="https://instagram.com/apartmentbeatrice" target="_blank" rel="noopener">Instagram</a>
+      </div>
+    </div>
+  </footer>
 
   <script src="booking.js"></script>
 </body>
