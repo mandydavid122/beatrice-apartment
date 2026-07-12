@@ -20,7 +20,7 @@ export async function onRequestPatch(context) {
   }
 
   const status = body.status;
-  if (status !== "approved" && status !== "rejected") {
+  if (status !== "approved" && status !== "rejected" && status !== "pending") {
     return json({ error: "bad_status" }, 400);
   }
 

@@ -49,20 +49,24 @@
     empty.hidden = list.length !== 0;
     rowsEl.innerHTML = list.map(rowHtml).join("");
     rowsEl.querySelectorAll("[data-approve]").forEach(function (btn) {
-      btn.addEventListener("click", function () { decide(btn.getAttribute("data-approve"), "approved", btn); });
+      btn.addEventListener("click", function () { confirmDecide(btn.getAttribute("data-approve"), "approved", btn); });
     });
     rowsEl.querySelectorAll("[data-reject]").forEach(function (btn) {
-      btn.addEventListener("click", function () { decide(btn.getAttribute("data-reject"), "rejected", btn); });
+      btn.addEventListener("click", function () { confirmDecide(btn.getAttribute("data-reject"), "rejected", btn); });
+    });
+    rowsEl.querySelectorAll("[data-pending]").forEach(function (btn) {
+      btn.addEventListener("click", function () { confirmDecide(btn.getAttribute("data-pending"), "pending", btn); });
     });
   }
 
   function rowHtml(b) {
-    var actions = b.status === "pending"
-      ? '<div class="ad-actions">' +
-        '<button type="button" class="ad-btn" data-approve="' + b.id + '">Elfogad</button>' +
-        '<button type="button" class="ad-btn ad-btn--danger" data-reject="' + b.id + '">Elutasít</button>' +
-        '</div>'
-      : "—";
+    // Always editable — any status can be changed to any other, any time (Mandy must be
+    // able to correct a misclick). Both actions require confirmation before applying.
+    var actions = '<div class="ad-actions">' +
+      '<button type="button" class="ad-btn" data-approve="' + b.id + '">Elfogad</button>' +
+      '<button type="button" class="ad-btn ad-btn--danger" data-reject="' + b.id + '">Elutasít</button>' +
+      '<button type="button" class="ad-btn ad-btn--ghost" data-pending="' + b.id + '">Vissza függőbe</button>' +
+      '</div>';
     return "<tr>" +
       "<td>" + esc((b.created_at || "").replace("T", " ").slice(0, 16)) + "</td>" +
       "<td>" + esc(b.room_name) + "</td>" +
@@ -73,6 +77,17 @@
       '<td><span class="ad-status ad-status--' + esc(b.status) + '">' + esc(STATUS[b.status] || b.status) + "</span></td>" +
       "<td>" + actions + "</td>" +
       "</tr>";
+  }
+
+  var CONFIRM_MSG = {
+    approved: "Biztosan elfogadod ezt a foglalást?",
+    rejected: "Biztosan elutasítod ezt a foglalást?",
+    pending: "Biztosan visszaállítod függőbe ezt a foglalást?"
+  };
+
+  function confirmDecide(id, status, btn) {
+    if (!window.confirm(CONFIRM_MSG[status])) return;
+    decide(id, status, btn);
   }
 
   async function decide(id, status, btn) {
