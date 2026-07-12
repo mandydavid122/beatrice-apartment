@@ -48,14 +48,9 @@
       <p class="bk-intro__springs" data-i18n="introSprings"></p>
     </section>
 
-    <!-- ===== ROOM SHOWCASE — all 7 rooms (content, not availability) ===== -->
-    <section class="bk-showcase" id="szobak" aria-labelledby="szobakh">
-      <h2 id="szobakh" class="bk-section__title" data-i18n="showcaseTitle">Szobáink</h2>
-      <p class="bk-note" data-i18n="showcaseNote"></p>
-      <div class="bk-rooms" data-role="showcase"></div>
-    </section>
-
-    <!-- ===== BOOKING FLOW (3 steps — logic + step-indicator UX kept, re-skinned) ===== -->
+    <!-- ===== BOOKING FLOW (3 steps — logic + step-indicator UX kept, re-skinned) =====
+         Placed directly under the intro, ABOVE the room showcase: booking is the primary
+         conversion action (K2) and must not sit below the gallery. -->
     <section class="bk-flow" id="foglalas" aria-labelledby="flowh">
       <h2 id="flowh" class="bk-section__title" data-i18n="flowTitle">Foglalás három lépésben</h2>
 
@@ -131,6 +126,13 @@
       </div>
     </section>
 
+    <!-- ===== ROOM SHOWCASE — all 7 rooms (content, not availability) ===== -->
+    <section class="bk-showcase" id="szobak" aria-labelledby="szobakh">
+      <h2 id="szobakh" class="bk-section__title" data-i18n="showcaseTitle">Szobáink</h2>
+      <p class="bk-note" data-i18n="showcaseNote"></p>
+      <div class="bk-rooms" data-role="showcase"></div>
+    </section>
+
     <!-- ===== LOCATION / MAP ===== -->
     <section class="bk-map-sec" id="terkep" aria-labelledby="terkeph">
       <h2 id="terkeph" class="bk-section__title" data-i18n="mapTitle">Hol vagyunk</h2>
@@ -138,10 +140,11 @@
       <div class="bk-map">
         <iframe
           title="Apartment Beatrice — Google Maps"
-          src="https://www.google.com/maps?q=Apartment%20Beatrice%2C%20B%C3%A9ke%20utca%2C%20Kis%20B%C3%A9g%C3%A1ny%2C%20Zakarpattia%20Oblast%2C%20Ukraine&output=embed"
+          src="https://www.google.com/maps?q=48.2640138,22.5776255&z=17&output=embed"
           width="100%" height="320" style="border:0" loading="lazy"
           referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
       </div>
+      <p class="bk-note"><a href="https://maps.app.goo.gl/P8cM2MqWVm71cQLFA" target="_blank" rel="noopener" data-i18n="mapOpen">Megnyitás Google Maps-ben</a></p>
     </section>
 
   </main>

@@ -43,6 +43,7 @@ input:focus-visible, select:focus-visible, .ad-btn:focus-visible {
 .ad-error[hidden], .ad-empty[hidden] { display: none; }
 
 /* login */
+.ad-login[hidden] { display: none; }
 .ad-login { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 20px; }
 .ad-login__box { width: 100%; max-width: 360px; background: var(--a-surface); padding: 28px; border-radius: 16px; }
 .ad-login__box h1 { margin-bottom: 20px; }

@@ -35,6 +35,7 @@
     showcaseNote:  { hu: "Hét szoba közül választhatsz. A leírások hamarosan bővülnek.", ua: "Можна обрати з семи кімнат. Описи скоро доповнимо." },
     flowTitle:  { hu: "Foglalás három lépésben", ua: "Бронювання у три кроки" },
     mapTitle:   { hu: "Hol vagyunk", ua: "Де ми" },
+    mapOpen:    { hu: "Megnyitás Google Maps-ben", ua: "Відкрити в Google Maps" },
     napAddress: { hu: "Béke utca, Kis Bégány, Kárpátalja, Ukrajna", ua: "вул. Миру, Мала Бийгань, Закарпатська обл., Україна" },
     step1Label: { hu: "Dátum", ua: "Дати" },
     step2Label: { hu: "Szoba", ua: "Кімната" },
@@ -123,7 +124,10 @@
       li.classList.toggle("is-active", s === n);
       li.classList.toggle("is-done", !isNaN(n) && s < n);
     });
-    window.scrollTo({ top: 0, behavior: "auto" });
+    // Keep the booking flow in view on every step change — never jump to page top.
+    // #foglalas has scroll-margin-top:80px (booking.css) to clear the sticky header.
+    var flow = document.getElementById("foglalas");
+    if (flow) flow.scrollIntoView({ behavior: "auto", block: "start" });
   }
 
   function err(role, msg) {
