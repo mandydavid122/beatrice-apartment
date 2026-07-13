@@ -82,12 +82,12 @@ p { margin: 0 0 var(--sp-2); }
   z-index: 40;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  gap: var(--sp-2);
   padding: var(--sp-2) var(--sp-3);
   background: color-mix(in srgb, var(--c-ground) 92%, transparent);
   backdrop-filter: blur(6px);
 }
-.header__logo, .hero__mark, .footer__logo { aspect-ratio: 960 / 957; }
+.header__logo, .footer__logo { aspect-ratio: 960 / 957; }
 .header__logo { height: 36px; width: auto; mix-blend-mode: multiply; }
 
 /* ---- language toggle ---- */
@@ -106,12 +106,69 @@ p { margin: 0 0 var(--sp-2); }
 .lang__btn[aria-pressed="true"] { color: var(--c-ink); font-weight: 700; opacity: 1; }
 .lang__sep { color: var(--c-ink-soft); opacity: 0.5; }
 
+/* ---- anchor targets clear the sticky header (B6): ~80px header + 16px ---- */
+#rooms, #gallery, #location { scroll-margin-top: var(--sp-12); }
+
+/* ---- header nav + CTAs: mobile-first. Inline desktop group is hidden, hamburger shown ---- */
+.nav, .header__cta { display: none; }
+.hamburger {
+  display: flex; align-items: center; justify-content: center;
+  width: 48px; height: 48px;
+  border: none; background: none; color: var(--c-ink); cursor: pointer;
+}
+/* mobile: push lang toggle + hamburger to the right */
+@media (max-width: 899px) {
+  .lang { margin-left: auto; }
+}
+
+/* ---- mobile menu overlay (fullscreen behind hamburger) ---- */
+.menu {
+  position: fixed; inset: 0; z-index: 55;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: var(--sp-6);
+  padding: var(--sp-8) var(--sp-3);
+  background: var(--c-ground);
+  opacity: 0; visibility: hidden; pointer-events: none; /* C3 — no click-eating ghost layer */
+}
+.menu.open { opacity: 1; visibility: visible; pointer-events: auto; }
+@media (prefers-reduced-motion: no-preference) {
+  .menu { transition: opacity 180ms ease, visibility 180ms ease; }
+}
+body.menu-open { overflow: hidden; } /* C4 — every JS close path removes this */
+
+.menu__close {
+  position: absolute; top: var(--sp-2); right: var(--sp-3);
+  display: flex; align-items: center; justify-content: center;
+  width: 48px; height: 48px;
+  border: none; background: none; color: var(--c-ink); cursor: pointer;
+}
+.menu__nav { display: flex; flex-direction: column; align-items: center; gap: var(--sp-4); }
+.nav__link, .menu__link {
+  font-family: "PT Sans", sans-serif;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  color: var(--c-ink);
+}
+.menu__link { font-size: 1.25rem; padding: 8px 4px; }
+@media (hover: hover) { .nav__link:hover, .menu__link:hover { color: var(--c-accent); } }
+.nav__link:focus-visible, .menu__link:focus-visible { color: var(--c-accent); outline: none; }
+.menu__cta { display: flex; flex-direction: column; align-items: stretch; gap: var(--sp-2); width: min(320px, 80vw); }
+.menu__cta .btn { text-align: center; }
+
+/* ---- desktop ≥900: inline nav + CTAs, right-aligned before language toggle; overlay off ---- */
+@media (min-width: 900px) {
+  .hamburger, .menu { display: none; }
+  .nav { display: flex; align-items: center; gap: var(--sp-3); margin-left: auto; }
+  .nav__link { font-size: 0.9375rem; padding: 12px 4px; }
+  .header__cta { display: flex; align-items: center; gap: var(--sp-2); }
+  .header__cta .btn { padding: 12px 20px; } /* 48px tall → header ~80px, matches scroll-margin */
+}
+
 /* ---- hero ---- */
 .hero { padding: var(--sp-8) 0; }
 /* mobile: reproduce the old .wrap constraint on each child (stacked, centered) */
 .hero__text { max-width: 640px; margin: 0 auto; padding: 0 var(--sp-3); text-align: center; }
 .hero__figure { max-width: 640px; margin: var(--sp-3) auto 0; padding: 0 var(--sp-3); }
-.hero__mark { width: min(260px, 62vw); height: auto; margin: var(--sp-3) auto var(--sp-2); mix-blend-mode: multiply; }
 .hero__tagline {
   font-family: "Playfair Display", serif;
   font-style: italic;
@@ -198,7 +255,7 @@ p { margin: 0 0 var(--sp-2); }
   width: 100%; height: auto; display: block;
   object-fit: cover; border-radius: var(--r-sm);
 }
-.hero__photo { aspect-ratio: 3 / 2; margin-top: var(--sp-3); }
+.hero__photo { aspect-ratio: 4 / 3; margin-top: var(--sp-3); } /* taller = more dominant, matches 620×465 intrinsic (no crop) */
 .feature__photo { aspect-ratio: 3 / 2; }
 .room__photo { aspect-ratio: 4 / 3; margin-top: var(--sp-2); }
 .map__photo { aspect-ratio: 1 / 1; margin: var(--sp-3) 0; }
@@ -226,6 +283,18 @@ p { margin: 0 0 var(--sp-2); }
 .footer { text-align: center; padding: var(--sp-6) var(--sp-3) calc(var(--sp-8) + 64px); }
 .footer__logo { height: 52px; width: auto; mix-blend-mode: multiply; margin: 0 auto var(--sp-2); }
 .footer a { text-decoration: underline; text-underline-offset: 3px; }
+
+.footer-credit {
+  display: inline-flex; align-items: center; gap: 6px;
+  margin-top: var(--sp-3);
+  font-family: "PT Sans", sans-serif;
+  font-size: 0.8125rem;
+  color: var(--c-ink-soft);
+  text-decoration: none;
+  opacity: 0.75;
+}
+.footer-credit:hover { opacity: 1; text-decoration: underline; text-underline-offset: 3px; }
+.footer-credit__mark { color: var(--c-accent); }
 
 /* ---- sticky mobile conversion bar ---- */
 .stickybar {
@@ -289,20 +358,19 @@ p { margin: 0 0 var(--sp-2); }
   /* hero → two-column, photo breaks out and bleeds to the right viewport edge */
   .hero {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) min(800px, 46vw);
+    grid-template-columns: minmax(0, 1fr) min(900px, 52vw); /* more weight to the photo */
     align-items: center;
     gap: var(--sp-8);
     padding: var(--sp-12) 0;
     padding-left: max(var(--sp-6), calc((100vw - 1200px) / 2 + var(--sp-3)));
   }
   .hero__text { text-align: left; max-width: 520px; margin: 0; padding: 0; }
-  .hero__mark { margin: 0 0 var(--sp-2); }
   .hero .swash { margin-left: 0; margin-right: auto; }
   .hero__text .cta-row { justify-content: flex-start; }
   .hero__figure { max-width: none; margin: 0; padding: 0; }
   .hero__photo {
     aspect-ratio: 4 / 3;
-    max-height: 78vh;
+    max-height: 84vh;
     border: 1px solid color-mix(in srgb, var(--c-ink) 15%, transparent);
   }
 

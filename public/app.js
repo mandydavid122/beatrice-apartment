@@ -11,6 +11,10 @@ var COPY = {
   ctaBookRoom:   { hu: "Foglalj szobát", ua: "Забронювати кімнату" },
   ctaCall:       { hu: "Hívás", ua: "Подзвонити" },
   ctaMaps:       { hu: "Útvonal", ua: "Маршрут" },
+  // Nav labels — short functional UI strings. TODO: human review (S9).
+  navRooms:      { hu: "Szobák", ua: "Кімнати" },
+  navGallery:    { hu: "Galéria", ua: "Галерея" },
+  navLocation:   { hu: "Elhelyezkedés", ua: "Розташування" },
   priceLine:     { hu: "1200–1500 UAH / éjszaka / szoba",
                    ua: "1200–1500 грн / ніч / кімната" },
   hostWelcome:   { hu: "Nem egy szállodalánc vagyunk — egy családi panzió, ahol minden szobát mi magunk tartunk rendben, és személyesen fogadunk mindenkit, aki megérkezik.",
@@ -94,6 +98,44 @@ apply(saved);
 document.querySelectorAll(".lang__btn").forEach(function (b) {
   b.addEventListener("click", function () { apply(b.getAttribute("data-lang")); });
 });
+
+// Mobile nav menu (hamburger). toggleMenu/openMenu/closeMenu are top-level (D2) so the
+// inline onclick handlers fire even if the wiring IIFE below is skipped.
+function openMenu() {
+  var menu = document.getElementById("menu");
+  var burger = document.querySelector(".hamburger");
+  if (!menu) return;
+  menu.classList.add("open");
+  document.body.classList.add("menu-open"); // scroll-lock; every close path removes it (C4)
+  if (burger) burger.setAttribute("aria-expanded", "true");
+}
+function closeMenu() {
+  var menu = document.getElementById("menu");
+  var burger = document.querySelector(".hamburger");
+  if (!menu) return;
+  menu.classList.remove("open");
+  document.body.classList.remove("menu-open");
+  if (burger) burger.setAttribute("aria-expanded", "false");
+}
+function toggleMenu() {
+  var menu = document.getElementById("menu");
+  if (!menu) return;
+  if (menu.classList.contains("open")) closeMenu(); else openMenu();
+}
+(function () {
+  var menu = document.getElementById("menu");
+  if (!menu) return;
+  // close on nav-link or CTA tap
+  menu.querySelectorAll(".menu__link, .menu__cta a").forEach(function (a) {
+    a.addEventListener("click", closeMenu);
+  });
+  // close on backdrop tap (the overlay itself, not its children)
+  menu.addEventListener("click", function (e) { if (e.target === menu) closeMenu(); });
+  // close on Esc
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape" && menu.classList.contains("open")) closeMenu();
+  });
+})();
 
 // Scroll-to-top button: appears once the user scrolls past the hero.
 (function () {

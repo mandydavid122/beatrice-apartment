@@ -48,12 +48,45 @@
     <a href="#top" aria-label="Apartment Beatrice — vissza a tetejére / нагору">
       <img class="header__logo" src="/assets/logo.jpg" alt="Apartment Beatrice">
     </a>
+
+    <!-- desktop: inline nav links, right-aligned before the language toggle -->
+    <nav class="nav" aria-label="Fő navigáció / Головна навігація">
+      <a class="nav__link" href="#rooms" data-i18n="navRooms"></a>
+      <a class="nav__link" href="#gallery" data-i18n="navGallery"></a>
+      <a class="nav__link" href="#location" data-i18n="navLocation"></a>
+    </nav>
+    <div class="header__cta">
+      <a class="btn btn--ghost" href="/foglalas/" data-i18n="ctaBookRoom"></a>
+      <a class="btn btn--ghost" data-link="tel" data-i18n="ctaCall"></a>
+    </div>
+
     <nav class="lang" aria-label="Nyelv / Мова">
       <button class="lang__btn" data-lang="hu" aria-pressed="true">HU</button>
       <span class="lang__sep" aria-hidden="true">/</span>
       <button class="lang__btn" data-lang="ua" aria-pressed="false">UA</button>
     </nav>
+
+    <button class="hamburger" type="button" onclick="toggleMenu()" aria-label="Menü / Меню" aria-expanded="false" aria-controls="menu">
+      <svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true"><path d="M4 7 H20 M4 12 H20 M4 17 H20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path></svg>
+    </button>
   </header>
+
+  <!-- mobile: fullscreen menu overlay. Sibling of <header> so position:fixed maps to the
+       viewport (header's backdrop-filter would otherwise trap a fixed child inside it). -->
+  <div class="menu" id="menu">
+    <button class="menu__close" type="button" onclick="closeMenu()" aria-label="Bezárás / Закрити">
+      <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><path d="M6 6 L18 18 M18 6 L6 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path></svg>
+    </button>
+    <nav class="menu__nav" aria-label="Fő navigáció / Головна навігація">
+      <a class="menu__link" href="#rooms" data-i18n="navRooms"></a>
+      <a class="menu__link" href="#gallery" data-i18n="navGallery"></a>
+      <a class="menu__link" href="#location" data-i18n="navLocation"></a>
+    </nav>
+    <div class="menu__cta">
+      <a class="btn btn--ghost" href="/foglalas/" data-i18n="ctaBookRoom"></a>
+      <a class="btn btn--ghost" data-link="tel" data-i18n="ctaCall"></a>
+    </div>
+  </div>
 
   <main>
 
@@ -61,7 +94,6 @@
   <section class="hero">
     <div class="hero__text">
       <div class="eyebrow" data-i18n="heroEyebrow"></div>
-      <img class="hero__mark" src="/assets/logo.jpg" alt="Apartment Beatrice — AB monogram">
       <h1 class="hero__tagline" data-i18n="heroTagline"></h1>
       <p class="hero__sub" data-i18n="heroSubcopy"></p>
       <div class="cta-row">
@@ -97,7 +129,7 @@
   </section>
 
   <!-- ===== ROOMS ===== -->
-  <section class="band">
+  <section class="band" id="rooms">
     <div class="wrap">
       <div class="section-head reveal">
         <h2 data-i18n="roomsTitle"></h2>
@@ -116,7 +148,7 @@
   </section>
 
   <!-- ===== GALLERY ===== -->
-  <section class="band band--alt">
+  <section class="band band--alt" id="gallery">
     <div class="wrap gallery-wrap">
       <div class="section-head reveal" style="text-align:left">
         <h2 data-i18n="galleryTitle"></h2>
@@ -206,7 +238,7 @@
   </section>
 
   <!-- ===== LOCATION ===== -->
-  <section class="band">
+  <section class="band" id="location">
     <div class="wrap">
       <div class="section-head reveal" style="text-align:left">
         <h2 data-i18n="locationTitle"></h2>
@@ -250,6 +282,12 @@
         <a href="https://instagram.com/apartmentbeatrice" target="_blank" rel="noopener">Instagram</a>
       </div>
     </div>
+    <a class="footer-credit" href="https://monarchscalingagency.com" target="_blank" rel="noopener">
+      <svg class="footer-credit__mark" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
+        <path d="M3 20 L3 4 L12 14 L21 4 L21 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <span>Made by Monarch Scaling Agency</span>
+    </a>
   </footer>
 
   <!-- ===== STICKY MOBILE CONVERSION BAR ===== -->
