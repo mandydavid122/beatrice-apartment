@@ -64,7 +64,7 @@ async function onRequestPatch(context) {
     return json({ error: "bad_json" }, 400);
   }
   const status = body.status;
-  if (status !== "approved" && status !== "rejected") {
+  if (status !== "approved" && status !== "rejected" && status !== "pending") {
     return json({ error: "bad_status" }, 400);
   }
   const res = await DB.prepare(
@@ -160,7 +160,7 @@ async function onRequestGet2(context) {
 }
 __name(onRequestGet2, "onRequestGet");
 
-// ../.wrangler/tmp/pages-E59sf6/functionsRoutes-0.15133352649281584.mjs
+// ../.wrangler/tmp/pages-yDrcxQ/functionsRoutes-0.8925599910235907.mjs
 var routes = [
   {
     routePath: "/api/admin/bookings/:id",

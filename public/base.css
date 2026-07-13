@@ -155,10 +155,13 @@ body.menu-open { overflow: hidden; } /* C4 — every JS close path removes this 
 .menu__cta { display: flex; flex-direction: column; align-items: stretch; gap: var(--sp-2); width: min(320px, 80vw); }
 .menu__cta .btn { text-align: center; }
 
-/* ---- desktop ≥900: inline nav + CTAs, right-aligned before language toggle; overlay off ---- */
+/* ---- desktop ≥900: logo left · nav centered · CTAs + lang right; overlay off ----
+   nav grows to fill the corridor between logo and the CTA cluster and centers its links
+   there — collision-free at every width. True viewport-center would overlap the (wide UA)
+   CTAs below ~1100px, so we center in the available header space instead. */
 @media (min-width: 900px) {
   .hamburger, .menu { display: none; }
-  .nav { display: flex; align-items: center; gap: var(--sp-3); margin-left: auto; }
+  .nav { display: flex; align-items: center; justify-content: center; gap: var(--sp-3); flex: 1 1 auto; }
   .nav__link { font-size: 0.9375rem; padding: 12px 4px; }
   .header__cta { display: flex; align-items: center; gap: var(--sp-2); }
   .header__cta .btn { padding: 12px 20px; } /* 48px tall → header ~80px, matches scroll-margin */

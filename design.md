@@ -100,7 +100,7 @@ Accent is CTA-only: the "Foglalj szobát" booking button, phone link, map link. 
 - Room photos: wide-angle, daylight, uncluttered — sell the space, not props.
 - Exterior/location shots: establish Mala Byihan setting and proximity to Kosonь thermal springs context without needing copy to explain it.
 - Every not-yet-supplied image slot stays a labelled placeholder, never a finished-looking fake.
-- **Bookable rooms (7).** The booking subsystem exposes 7 rooms (see schema.sql seed). 5 reuse real photos already in the existing 13-photo set (caption keys `cap8`, `cap9`, `caph1`, `caph4`, `cap2`); the remaining 2 ("Szoba 6", "Szoba 7") are labelled striped placeholders pending real photography — never a finished-looking fake. Room descriptions are the literal placeholder `[LEÍRÁS: …]` / `[ОПИС: …]` per doctrine S7 until the client supplies real copy.
+- **Bookable rooms (7).** The booking subsystem exposes 7 rooms (see schema.sql seed). All 7 reuse real photos from the existing photo set (caption keys `cap8`, `cap9`, `caph1`, `caph4`, `cap2`, and `cap10`/`cap11` for "Szoba 6"/"Szoba 7"). Room descriptions are concrete, photo-derived one-liners (S7-clean: no marketing adjectives); HU authored, UA machine-drafted with human review pending (S9).
 
 ## Imperfection
 

@@ -30,7 +30,7 @@ var COPY = {
   galleryTitle:  { hu: "Galéria", ua: "Галерея" },
 
   locationTitle: { hu: "Elhelyezkedés", ua: "Розташування" },
-  locationCopy:  { hu: "Kis Bégányban vagyunk, sétatávolságra a kosonyi termálfürdőktől, kényelmes autóútra a magyar határtól.",
+  locationCopy:  { hu: "Kis Bégányban vagyunk, 11 km-re a kosonyi termálfürdőktől, kényelmes autóútra a magyar határtól.",
                    ua: "Ми в Малій Бийгані, у пішій відстані від косоньських термальних вод, зручно доїхати від угорського кордону." },
   napName:       { hu: "Apartment Beatrice", ua: "Apartment Beatrice" },
   napAddress:    { hu: "Béke utca, Kis Bégány, Kárpátalja, Ukrajna",

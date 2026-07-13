@@ -17,17 +17,50 @@
 </head>
 <body>
 
-  <!-- ===== HEADER (same chrome as the main site: logo + language toggle) ===== -->
+  <!-- ===== HEADER (same component as the main site; nav points back to homepage sections) ===== -->
   <header class="header" id="top">
     <a href="/" aria-label="Apartment Beatrice — főoldal / головна">
       <img class="header__logo" src="/assets/logo.jpg" alt="Apartment Beatrice">
     </a>
+
+    <!-- desktop: inline nav links, centered in the header -->
+    <nav class="nav" aria-label="Fő navigáció / Головна навігація">
+      <a class="nav__link" href="/#rooms" data-i18n="navRooms"></a>
+      <a class="nav__link" href="/#gallery" data-i18n="navGallery"></a>
+      <a class="nav__link" href="/#location" data-i18n="navLocation"></a>
+    </nav>
+    <div class="header__cta">
+      <a class="btn btn--ghost" href="/foglalas/" data-i18n="ctaBookRoom"></a>
+      <a class="btn btn--ghost" data-link="tel" data-i18n="ctaCall"></a>
+    </div>
+
     <nav class="lang" aria-label="Nyelv / Мова">
       <button class="lang__btn" data-lang="hu" aria-pressed="true">HU</button>
       <span class="lang__sep" aria-hidden="true">/</span>
       <button class="lang__btn" data-lang="ua" aria-pressed="false">UA</button>
     </nav>
+
+    <button class="hamburger" type="button" onclick="toggleMenu()" aria-label="Menü / Меню" aria-expanded="false" aria-controls="menu">
+      <svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true"><path d="M4 7 H20 M4 12 H20 M4 17 H20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path></svg>
+    </button>
   </header>
+
+  <!-- mobile: fullscreen menu overlay. Sibling of <header> so position:fixed maps to the
+       viewport (header's backdrop-filter would otherwise trap a fixed child inside it). -->
+  <div class="menu" id="menu">
+    <button class="menu__close" type="button" onclick="closeMenu()" aria-label="Bezárás / Закрити">
+      <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><path d="M6 6 L18 18 M18 6 L6 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path></svg>
+    </button>
+    <nav class="menu__nav" aria-label="Fő navigáció / Головна навігація">
+      <a class="menu__link" href="/#rooms" data-i18n="navRooms"></a>
+      <a class="menu__link" href="/#gallery" data-i18n="navGallery"></a>
+      <a class="menu__link" href="/#location" data-i18n="navLocation"></a>
+    </nav>
+    <div class="menu__cta">
+      <a class="btn btn--ghost" href="/foglalas/" data-i18n="ctaBookRoom"></a>
+      <a class="btn btn--ghost" data-link="tel" data-i18n="ctaCall"></a>
+    </div>
+  </div>
 
   <!-- in-page nav + real conversion links -->
   <nav class="bk-subnav" aria-label="Oldal navigáció / Навігація">
@@ -163,6 +196,9 @@
     </div>
   </footer>
 
+  <!-- app.js: shared header wiring (hamburger toggleMenu, lang toggle, data-link hrefs).
+       Loads before booking.js; every query in it is null-checked so absent elements are no-ops. -->
+  <script src="/app.js"></script>
   <script src="booking.js"></script>
 </body>
 </html>
