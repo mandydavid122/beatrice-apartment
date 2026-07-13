@@ -10,26 +10,26 @@
   // HU authored, UA machine-drafted, human review pending (S9).
   var ROOMS = [
     { name_hu: "Szoba saját fürdővel", name_ua: "Кімната з власною ванною", photo_ref: "cap8",
-      description_hu: "Franciaágy és pótágy, saját fürdőszoba, TV és kis hűtő a szobában.",
-      description_ua: "Двоспальне ліжко та додаткове ліжко, власна ванна кімната, телевізор і невеликий холодильник у номері." },
+      description_hu: " (Franciaágy és pótágy, saját fürdőszoba, TV és kis hűtő a szobában.)",
+      description_ua: " (Двоспальне ліжко та додаткове ліжко, власна ванна кімната, телевізор і невеликий холодильник у номері.)" },
     { name_hu: "Családi szoba",        name_ua: "Сімейна кімната",          photo_ref: "cap9",
-      description_hu: "Franciaágy és extra fekhely, saját mosdó és WC a szobához.",
-      description_ua: "Двоспальне ліжко та додаткове спальне місце, власний туалет і умивальник у номері." },
+      description_hu: " (Franciaágy és extra fekhely, saját mosdó és WC a szobához.)",
+      description_ua: " (Двоспальне ліжко та додаткове спальне місце, власний туалет і умивальник у номері.)" },
     { name_hu: "Hálószoba",            name_ua: "Спальня",                  photo_ref: "caph1",
-      description_hu: "Franciaágy, éjjeliszekrény olvasólámpával, laminált padló.",
-      description_ua: "Двоспальне ліжко, тумбочка з лампою для читання, ламінована підлога." },
+      description_hu: " (Franciaágy, éjjeliszekrény olvasólámpával, laminált padló.)",
+      description_ua: " (Двоспальне ліжко, тумбочка з лампою для читання, ламінована підлога.)" },
     { name_hu: "Hálószoba",            name_ua: "Спальня",                  photo_ref: "caph4",
-      description_hu: "Két egybetolt egyszemélyes ágy, ablak függönnyel, éjjeliszekrény.",
-      description_ua: "Два зсунуті односпальні ліжка, вікно зі шторами, тумбочка." },
+      description_hu: " (Két egybetolt egyszemélyes ágy, ablak függönnyel, éjjeliszekrény.)",
+      description_ua: " (Два зсунуті односпальні ліжка, вікно зі шторами, тумбочка.)" },
     { name_hu: "Hangulatos hálószoba", name_ua: "Затишна спальня",          photo_ref: "cap2",
-      description_hu: "Franciaágy, nád mennyezetdísz és szőttes falidíszek, laminált padló.",
-      description_ua: "Двоспальне ліжко, очеретяна стеля та ткані настінні прикраси, ламінована підлога." },
+      description_hu: " (Franciaágy és pótágy, saját fürdőszoba, TV és kis hűtő a szobában.)",
+      description_ua: " (Двоспальне ліжко, очеретяна стеля та ткані настінні прикраси, ламінована підлога.)" },
     { name_hu: "Szoba 6",              name_ua: "Кімната 6",                photo_ref: "cap10",
-      description_hu: "Franciaágy és külön egyszemélyes ágy, saját mosdó és WC, fapolcos tároló.",
-      description_ua: "Двоспальне ліжко та окреме односпальне ліжко, власний туалет і умивальник, дерев'яна полиця." },
+      description_hu: " (Franciaágy és külön egyszemélyes ágy, saját mosdó és WC, fapolcos tároló.)",
+      description_ua: " (Двоспальне ліжко та окреме односпальне ліжко, власний туалет і умивальник, дерев'яна полиця.)" },
     { name_hu: "Szoba 7",              name_ua: "Кімната 7",                photo_ref: "cap11",
-      description_hu: "Franciaágy, ruhásszekrény és TV, laminált padló.",
-      description_ua: "Двоспальне ліжко, шафа для одягу та телевізор, ламінована підлога." }
+      description_hu: " (Franciaágy, ruhásszekrény és TV, laminált padló.)",
+      description_ua: " (Двоспальне ліжко, шафа для одягу та телевізор, ламінована підлога.)" }
   ];
 
   var STR = {
